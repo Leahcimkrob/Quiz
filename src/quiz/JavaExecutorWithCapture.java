@@ -23,7 +23,12 @@ public class JavaExecutorWithCapture {
 
         StringWriter compilationOutput = new StringWriter();
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        int compilationResult = compiler.run(null, new PrintWriter(compilationOutput), new PrintWriter(compilationOutput), sourceFile.toString());
+        int compilationResult = compiler.run(
+        	    null, // InputStream (z. B. keine Eingabe)
+        	    System.out, // OutputStream für Standardausgabe
+        	    System.err, // OutputStream für Standardfehlerausgabe
+        	    sourceFile.toString() // Datei, die kompiliert werden soll
+        	);
 
         if (compilationResult == 0) {
             System.out.println("Kompilierung erfolgreich!");
