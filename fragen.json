@@ -1,0 +1,18 @@
+[
+  {
+    "questionText": "Wie heisst die ehemalige Hauptstadt von Deutschland?",
+    "optionA": "Berlin",
+    "optionB": "Düsseldorf",
+    "optionC": "Bonn",
+    "optionD": "Hamburg",
+    "correctOption": "c"
+  },
+  {
+    "questionText": "Was sind 2+2*2",
+    "optionA": "8",
+    "optionB": "16",
+    "optionC": "4",
+    "optionD": "6",
+    "correctOption": "d"
+  }
+]
