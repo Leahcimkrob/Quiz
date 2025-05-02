@@ -1,0 +1,16 @@
+2025-05-02 09:53:35	Start Kompilierungsprotokoll
+
+src\quiz\FehlerProgramm.java:13: Fehler: Unzul�ssiges Zeichen: "\ud83d\udd04"
+             ? F�hrt die Hauptlogik des FehlerProgramms aus
+             ^
+src\quiz\FehlerProgramm.java:13: Fehler: ';' erwartet
+             ? F�hrt die Hauptlogik des FehlerProgramms aus
+                         ^
+src\quiz\FehlerProgramm.java:13: Fehler: ';' erwartet
+             ? F�hrt die Hauptlogik des FehlerProgramms aus
+                                        ^
+src\quiz\FehlerProgramm.java:13: Fehler: ';' erwartet
+             ? F�hrt die Hauptlogik des FehlerProgramms aus
+                                                            ^
+4 Fehler
+2025-05-02 09:53:35	Ende Kompilierungsprotokoll
