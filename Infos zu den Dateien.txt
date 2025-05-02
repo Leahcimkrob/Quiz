@@ -1,0 +1,54 @@
+### **Dateien und deren Funktionalität**
+
+1. **[Aufgabe.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/Aufgabe.java)**
+   - **Beschreibung**: Definiert eine Schnittstelle für alle Aufgaben (Frage stellen, Antwort lesen, Antwort prüfen).
+   - **Status**: **Wichtig** für die Struktur der Aufgaben.
+
+2. **[AufgabenTrainer.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/AufgabenTrainer.java)**
+   - **Beschreibung**: Verwendet die `Aufgabe`-Schnittstelle, um verschiedene Arten von Aufgaben zu testen.
+   - **Status**: **Nützlich**, kann aber nur für Tests relevant sein.
+
+3. **[AufgabenVerwalter.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/AufgabenVerwalter.java)**
+   - **Beschreibung**: Verwalten und Speichern von Aufgaben als JSON.
+   - **Status**: **Wichtig**, da es die Aufgaben persistent speichert.
+
+4. **[EinfacherProzessstart.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/EinfacherProzessstart.java)**
+   - **Beschreibung**: Startet einfache Prozesse und gibt die Ausgabe aus.
+   - **Status**: **Wahrscheinlich überflüssig**, da es keine direkte Verbindung zum Quiz hat.
+
+5. **[FehlerProgramm.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/FehlerProgramm.java)**
+   - **Beschreibung**: Führt die Hauptlogik aus und startet den `FehlerTrenner`.
+   - **Status**: **Wichtig**, da es die Fehlerbehandlung steuert.
+
+6. **[FehlerSammeln.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/FehlerSammeln.java)**
+   - **Beschreibung**: Kompiliert eine Java-Datei und sammelt Fehler.
+   - **Status**: **Kann redundant sein**, da ähnliche Funktionen in `FehlerSammlerKompilierung` enthalten sind.
+
+7. **[FehlerSammlerKompilierung.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/FehlerSammlerKompilierung.java)**
+   - **Beschreibung**: Sammelt und speichert Kompilierungsfehler in einer Log-Datei.
+   - **Status**: **Wichtig**, da es für die Fehlertrennung verwendet wird.
+
+8. **[FehlerSammlerLaufzeit.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/FehlerSammlerLaufzeit.java)**
+   - **Beschreibung**: Sammelt und speichert Laufzeitfehler in einer Log-Datei.
+   - **Status**: **Wichtig**, da es für die Fehlertrennung verwendet wird.
+
+9. **[FehlerStarter.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/FehlerStarter.java)**
+   - **Beschreibung**: Startet `FehlerProgramm` und gibt die gesammelte Ausgabe aus.
+   - **Status**: **Wahrscheinlich redundant**, da der `FehlerTrenner` ähnliche Aufgaben erfüllt.
+
+10. **[FehlerTrenner.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/FehlerTrenner.java)**
+    - **Beschreibung**: Koordiniert die Sammlung von Kompilierungs- und Laufzeitfehlern.
+    - **Status**: **Wichtig**, da es die zentrale Fehlerbehandlungslogik enthält.
+
+---
+
+### **Mögliche überflüssige Dateien**
+
+- **[EinfacherProzessstart.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/EinfacherProzessstart.java)**
+  - Grund: Kein klarer Zusammenhang mit der Hauptlogik des Quiz.
+
+- **[FehlerSammeln.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/FehlerSammeln.java)**
+  - Grund: Doppelte Funktionalität, die bereits durch `FehlerSammlerKompilierung` abgedeckt wird.
+
+- **[FehlerStarter.java](https://github.com/Leahcimkrob/Quiz/blob/master/src/quiz/FehlerStarter.java)**
+  - Grund: Redundant, da `FehlerTrenner` ähnliche Aufgaben übernimmt.
