@@ -25,7 +25,7 @@ public class SpeichereEineMCFrage {
         );
 
         // In Datei schreiben
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("mc_question.ser"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("mc_question.json"))) {
             oos.writeObject(mcQuestion);
             System.out.println("Frage wurde erfolgreich gespeichert.");
             oos.close();
