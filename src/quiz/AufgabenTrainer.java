@@ -1,9 +1,10 @@
 package quiz;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class AufgabenTrainer {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException{
         Scanner scanner = new Scanner(System.in);
         String pfad = "fragen.json"; // Pfad zur JSON-Datei
 
@@ -12,7 +13,7 @@ public class AufgabenTrainer {
         while (true) {
             System.out.println("\n📋 Wähle eine Option:");
             System.out.println("1. Multiple-Choice-Frage");
-            System.out.println("2. HelloWorldChecker");
+            System.out.println("2. JavaChecker");
             System.out.println("3. Beenden");
             System.out.print("Deine Auswahl: ");
             String auswahl = scanner.nextLine().trim();
@@ -32,7 +33,7 @@ public class AufgabenTrainer {
                 case "2":
                     try {
                         // HelloWorldChecker ausführen
-                        HelloWorldChecker.main(new String[]{});
+                        JavaChecker.main(new String[]{});
                     } catch (Exception e) {
                         System.out.println("❌ Fehler bei der Ausführung des HelloWorldCheckers.");
                         e.printStackTrace();

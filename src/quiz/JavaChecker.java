@@ -9,7 +9,7 @@ import javax.tools.ToolProvider;
 import java.io.*;
 import java.nio.file.*;
 
-public class HelloWorldChecker {
+public class JavaChecker {
     /**
      * Hauptmethode, die das Benutzerprogramm kompiliert, ausführt und überprüft.
      *
