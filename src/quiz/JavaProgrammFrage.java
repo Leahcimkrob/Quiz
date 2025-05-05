@@ -3,25 +3,16 @@ package quiz;
 import java.util.Scanner;
 
 /**
- * Repräsentiert eine Java-Programmieraufgabe.
+ * Java-Programm-Aufgabe, die das Aufgabe-Interface implementiert.
  */
 public class JavaProgrammFrage implements Aufgabe {
 
-    private static final long serialVersionUID = 1L;
-
-    private String aufgabenstellung;
-    private String erwarteterCodeauszug;
-    private transient String benutzerEingabe;
-    private transient Scanner scanner = new Scanner(System.in);
-
-    public JavaProgrammFrage(String aufgabenstellung, String erwarteterCodeauszug) {
-        this.aufgabenstellung = aufgabenstellung;
-        this.erwarteterCodeauszug = erwarteterCodeauszug;
-    }
+    private String benutzerEingabe;
+    private Scanner scanner = new Scanner(System.in);
 
     @Override
     public void stelleFrage() {
-        System.out.println(aufgabenstellung);
+        System.out.println("Schreibe ein Programm, das 'Hello World' ausgibt:");
     }
 
     @Override
@@ -37,10 +28,10 @@ public class JavaProgrammFrage implements Aufgabe {
 
     @Override
     public void pruefeAntwort() {
-        if (benutzerEingabe != null && benutzerEingabe.contains(erwarteterCodeauszug)) {
-            System.out.println("✅ Richtiger Programmcode gefunden!");
+        if (benutzerEingabe.contains("System.out.println('Hello World')")) {
+            System.out.println("✅ Richtige Ausgabe im Programm gefunden!");
         } else {
-            System.out.println("❌ Fehler: Erwarteter Code wurde nicht gefunden.");
+            System.out.println("❌ Fehler: 'Hello World' wurde nicht korrekt ausgegeben.");
         }
     }
 }

@@ -1,7 +1,0 @@
-2025-05-02 09:53:36	Start des Fehlerprotokolls
-
-Fehler: Hauptklasse quiz.FehlerProgramm konnte nicht gefunden oder geladen werden
-
-Ursache: java.lang.ClassNotFoundException: quiz.FehlerProgramm
-
-2025-05-02 09:53:36	Ende des Fehlerprotokolls
