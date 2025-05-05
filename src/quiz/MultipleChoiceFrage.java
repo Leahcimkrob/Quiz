@@ -82,4 +82,24 @@ public class MultipleChoiceFrage implements Aufgabe {
             return null;
         }
     }
+    
+    public String getQuestionText() { 
+    	return questionText; 
+    }
+    public String getOptionA() { 
+    	return optionA; 
+    	}
+    public String getOptionB() {
+    	return optionB; 
+    	}
+    public String getOptionC() { 
+    	return optionC; 
+    	}
+    public String getOptionD() { 
+    	return optionD; 
+    	}
+    public String getCorrectOption() { 
+    	return correctOption;
+    	}
+
 }

@@ -1,64 +1,69 @@
 package quiz;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-//Manager-Klasse zum Speichern und Laden mehrerer Fragen
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 public class MCFragenManager {
-	private List<MCFrage> fragenListe = new ArrayList<>();
 
-	public void addFrage(MCFrage frage) {
-		fragenListe.add(frage);
-	}
+    private List<MultipleChoiceFrage> fragenListe = new ArrayList<>();
 
-	public void saveToFile(String dateiname) {
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dateiname))) {
-			oos.writeObject(fragenListe);
-			System.out.println("Fragen wurden gespeichert.");
-		} catch (IOException e) {
-			System.out.println("Fehler beim Speichern: " + e.getMessage());
-		}
-	}
+    public void addFrage(MultipleChoiceFrage frage) {
+        fragenListe.add(frage);
+    }
 
-	@SuppressWarnings("unchecked")
-	public void loadFromFile(String dateiname) {
-		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dateiname))) {
-			fragenListe = (List<MCFrage>) ois.readObject();
-			System.out.println("Fragen wurden geladen.");
-		} catch (IOException | ClassNotFoundException e) {
-			System.out.println("Fehler beim Laden: " + e.getMessage());
-		}
-	}
+    public void saveToFile(String dateiname) {
+        try (FileWriter writer = new FileWriter(dateiname)) {
+            Gson gson = new Gson();
+            gson.toJson(fragenListe, writer);
+            System.out.println("Fragen wurden gespeichert.");
+        } catch (IOException e) {
+            System.out.println("Fehler beim Speichern: " + e.getMessage());
+        }
+    }
 
-	public void printFragen() {
-		for (MCFrage frage : fragenListe) {
-			System.out.println(frage.getQuestionText());
-			System.out.println(frage.getOptionA());
-			System.out.println(frage.getOptionB());
-			System.out.println(frage.getOptionC());
-			System.out.println(frage.getOptionD());
-			System.out.println();
-		}
-	}
+    public void loadFromFile(String dateiname) {
+        try (FileReader reader = new FileReader(dateiname)) {
+            Gson gson = new Gson();
+            fragenListe = gson.fromJson(reader, new TypeToken<List<MultipleChoiceFrage>>() {}.getType());
+            System.out.println("Fragen wurden geladen.");
+        } catch (IOException e) {
+            System.out.println("Fehler beim Laden: " + e.getMessage());
+        }
+    }
 
-	public static void main(String[] args) {
-		MCFragenManager manager = new MCFragenManager();
+    
+    
+    public void printFragen() {
+        for (MultipleChoiceFrage frage : fragenListe) {
+            System.out.println(frage.getQuestionText());
+            System.out.println("A) " + frage.getOptionA());
+            System.out.println("B) " + frage.getOptionB());
+            System.out.println("C) " + frage.getOptionC());
+            System.out.println("D) " + frage.getOptionD());
+            System.out.println();
+        }
+    }
 
-		// Fragen erstellen und hinzufügen
-		manager.addFrage(new MCFrage("Was ist die Hauptstadt von Frankreich?", "a) Berlin", "b) Madrid", "c) Paris",
-				"d) Rom", "c"));
-		manager.addFrage(new MCFrage("Welche Farbe hat der Himmel?", "a) Blau", "b) Rot", "c) Gelb", "d) Grün", "a"));
+    public static void main(String[] args) {
+        MCFragenManager manager = new MCFragenManager();
 
-		// Fragen speichern
-		manager.saveToFile("fragen.ser");
+        // Fragen erstellen und hinzufügen
+        manager.addFrage(new MultipleChoiceFrage("Was ist die Hauptstadt von Frankreich?", "Berlin", "Madrid", "Paris", "Rom", "C"));
+        manager.addFrage(new MultipleChoiceFrage("Welche Farbe hat der Himmel?", "Blau", "Rot", "Gelb", "Grün", "A"));
 
-		// Neu laden und ausgeben
-		manager.loadFromFile("fragen.ser");
-		manager.printFragen();
-	}
+        // Fragen speichern
+        manager.saveToFile("fragen.json");
+
+        // Neu laden und ausgeben
+        manager.loadFromFile("fragen.json");
+        manager.printFragen();
+    }
+    
+    
 }

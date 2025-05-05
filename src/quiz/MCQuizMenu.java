@@ -13,7 +13,7 @@ public class MCQuizMenu {
         boolean running = true;
 
         while (running) {
-            System.out.println("\n=== MC-Quiz Menü ===");
+            System.out.println("\n=== Fragen bearbeiten ===");
             System.out.println("1) Neue Frage hinzufügen");
             System.out.println("2) Alle Fragen anzeigen");
             System.out.println("3) Fragen speichern");

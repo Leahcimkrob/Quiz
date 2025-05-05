@@ -14,5 +14,13 @@
     "optionC": "4",
     "optionD": "6",
     "correctOption": "d"
+  },
+  {
+    "questionText": "Mit welcher Methode kann was auf dem Bildschirm ausgegeben werden?",
+    "optionA": "System.out.println",
+    "optionB": "system.out.printLN",
+    "optionC": "sys.Out.print",
+    "optionD": "print",
+    "correctOption": "a"
   }
 ]
