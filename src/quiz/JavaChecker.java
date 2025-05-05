@@ -8,26 +8,36 @@ import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.*;
 import java.nio.file.*;
+import java.util.Scanner;
 
-public class JavaChecker {
-    /**
-     * Hauptmethode, die das Benutzerprogramm kompiliert, ausführt und überprüft.
-     *
-     * @param args die Konsolenargumente
-     * @throws IOException falls ein Fehler beim Datei-Handling auftritt
-     * @throws InterruptedException falls der Prozess unterbrochen wird
-     */
-    public static void main(String[] args) throws IOException, InterruptedException {
-        System.out.println("Bitte gib dein Hello-World Java-Programm ein (Ende mit einer Leerzeile):");
+public class JavaChecker implements Aufgabe {
+		private String frageText = "" ;
+		private String antwort = "" ;		
 
-        BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
+	@Override
+	public void initialiereFrage() {
+		frageText = "Bitte gib dein Hello-World Java-Programm ein (Ende mit einer Leerzeile):";
+		antwort = "Hello World";		
+	}
+
+	@Override
+	public void stelleFrage() {
+		System.out.println(frageText);
+	}
+	
+	public String leseAntwortException(Scanner scanner) throws IOException {
+		BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sourceCode = new StringBuilder();
         String line;
 
         while (!(line = userInputReader.readLine()).isEmpty()) {
             sourceCode.append(line).append(System.lineSeparator());
         }
+		return sourceCode.toString();
+	}
 
+	public void pruefeAntwortExeption(String sourceCode) throws IOException, InterruptedException {
+		String line ="";
         String className = "HelloWorld";
         Path sourceFile = Paths.get(className + ".java");
         Files.writeString(sourceFile, sourceCode.toString());
@@ -67,5 +77,34 @@ public class JavaChecker {
 
         Files.deleteIfExists(sourceFile);
         Files.deleteIfExists(Paths.get(className + ".class"));
-    }
+
+		
+	}
+
+	@Override
+	public String leseAntwort(Scanner scanner) {
+		try {
+			return leseAntwortException(scanner);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}
+	}
+
+	@Override
+	public void pruefeAntwort(String antwort) {
+		 try {
+			 pruefeAntwortExeption(antwort);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}	
+	
+	
 }
