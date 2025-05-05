@@ -9,7 +9,7 @@ public class LeseEineMCFrage {
 
         // Aus Datei lesen
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("fragen.json"))) {
-        	MultipleChoiceFrage geleseneFrage = (MultipleChoiceFrage) ois.readObject();
+            MCFrage geleseneFrage = (MCFrage) ois.readObject();
             ois.close();
             
             // Ausgabe der geladenen Frage
