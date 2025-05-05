@@ -10,9 +10,9 @@ import java.util.List;
 
 //Manager-Klasse zum Speichern und Laden mehrerer Fragen
 public class MCFragenManager {
-	private List<MCFrage> fragenListe = new ArrayList<>();
+	private List<MultipleChoiceFrage> fragenListe = new ArrayList<>();
 
-	public void addFrage(MCFrage frage) {
+	public void addFrage(MultipleChoiceFrage frage) {
 		fragenListe.add(frage);
 	}
 
@@ -28,7 +28,7 @@ public class MCFragenManager {
 	@SuppressWarnings("unchecked")
 	public void loadFromFile(String dateiname) {
 		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dateiname))) {
-			fragenListe = (List<MCFrage>) ois.readObject();
+			fragenListe = (List<MultipleChoiceFrage>) ois.readObject();
 			System.out.println("Fragen wurden geladen.");
 		} catch (IOException | ClassNotFoundException e) {
 			System.out.println("Fehler beim Laden: " + e.getMessage());
@@ -36,7 +36,7 @@ public class MCFragenManager {
 	}
 
 	public void printFragen() {
-		for (MCFrage frage : fragenListe) {
+		for (MultipleChoiceFrage frage : fragenListe) {
 			System.out.println(frage.getQuestionText());
 			System.out.println(frage.getOptionA());
 			System.out.println(frage.getOptionB());
@@ -50,9 +50,9 @@ public class MCFragenManager {
 		MCFragenManager manager = new MCFragenManager();
 
 		// Fragen erstellen und hinzufügen
-		manager.addFrage(new MCFrage("Was ist die Hauptstadt von Frankreich?", "a) Berlin", "b) Madrid", "c) Paris",
+		manager.addFrage(new MultipleChoiceFrage("Was ist die Hauptstadt von Frankreich?", "a) Berlin", "b) Madrid", "c) Paris",
 				"d) Rom", "c"));
-		manager.addFrage(new MCFrage("Welche Farbe hat der Himmel?", "a) Blau", "b) Rot", "c) Gelb", "d) Grün", "a"));
+		manager.addFrage(new MultipleChoiceFrage("Welche Farbe hat der Himmel?", "a) Blau", "b) Rot", "c) Gelb", "d) Grün", "a"));
 
 		// Fragen speichern
 		manager.saveToFile("fragen.ser");

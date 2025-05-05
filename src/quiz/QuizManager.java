@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class QuizManager {
-    private List<MCFrage> fragenListe = new ArrayList<>();
+    private List<MultipleChoiceFrage> fragenListe = new ArrayList<>();
 
     public void neueFrageHinzufuegen(Scanner scanner) {
         try {
@@ -32,7 +32,7 @@ public class QuizManager {
                 throw new IllegalArgumentException("Ungültige Eingabe! Nur a, b, c oder d erlaubt.");
             }
 
-            MCFrage frage = new MCFrage(frageText, a, b, c, d, korrekt);
+            MultipleChoiceFrage frage = new MultipleChoiceFrage(frageText, a, b, c, d, korrekt);
             fragenListe.add(frage);
             System.out.println("✅ Frage erfolgreich hinzugefügt.");
         } catch (IllegalArgumentException e) {
@@ -48,7 +48,7 @@ public class QuizManager {
 
         System.out.println("\n📋 Alle Fragen:");
         for (int i = 0; i < fragenListe.size(); i++) {
-            MCFrage frage = fragenListe.get(i);
+        	MultipleChoiceFrage frage = fragenListe.get(i);
             System.out.println("Frage " + (i + 1) + ": " + frage.getQuestionText());
             System.out.println("a) " + frage.getOptionA());
             System.out.println("b) " + frage.getOptionB());
@@ -73,7 +73,7 @@ public class QuizManager {
     public void fragenLaden(String dateiname) {
         try (Reader reader = new FileReader(dateiname)) {
             Gson gson = new Gson();
-            fragenListe = gson.fromJson(reader, new TypeToken<List<MCFrage>>() {}.getType());
+            fragenListe = gson.fromJson(reader, new TypeToken<List<MultipleChoiceFrage>>() {}.getType());
             if (fragenListe == null) fragenListe = new ArrayList<>();
             System.out.println("✅ Fragen wurden aus JSON geladen.");
         } catch (FileNotFoundException e) {

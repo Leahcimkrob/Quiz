@@ -17,8 +17,6 @@ public class MultipleChoiceFrage implements Aufgabe {
     private String optionC;
     private String optionD;
     private String correctOption;  // Entspricht "correctOption" in der JSON-Datei
-    private transient String benutzerAntwort;
-    private transient Scanner scanner = new Scanner(System.in);
 
     // Standardkonstruktor
     public MultipleChoiceFrage() {}
@@ -34,6 +32,11 @@ public class MultipleChoiceFrage implements Aufgabe {
     }
 
     @Override
+    public void initialiereFrage() {
+        // Keine spezielle Initialisierung für Multiple-Choice-Fragen notwendig
+    }
+
+    @Override
     public void stelleFrage() {
         // Ausgabe der Frage
         System.out.println("\n" + questionText);
@@ -44,17 +47,18 @@ public class MultipleChoiceFrage implements Aufgabe {
     }
 
     @Override
-    public void leseAntwort() {
+    public String leseAntwort(Scanner scanner) {
         // Antwort einlesen
         System.out.print("Bitte gib deine Antwort ein (A, B, C, D): ");
-        benutzerAntwort = scanner.nextLine().trim().toUpperCase();
-        System.out.println("Du hast Antwort: " + benutzerAntwort + " eingegeben.");
+        String antwort = scanner.nextLine().trim().toUpperCase();
+        System.out.println("Du hast Antwort: " + antwort + " eingegeben.");
+        return antwort;
     }
 
     @Override
-    public void pruefeAntwort() {
+    public void pruefeAntwort(String antwort) {
         // Antwort vergleichen
-        if (benutzerAntwort.equalsIgnoreCase(correctOption)) {
+        if (antwort.equalsIgnoreCase(correctOption)) {
             System.out.println("✅ Richtig!");
         } else {
             System.out.println("❌ Falsch. Die richtige Antwort war: " + correctOption);
@@ -72,10 +76,7 @@ public class MultipleChoiceFrage implements Aufgabe {
             }
 
             // Zufällige Frage aus der Liste auswählen
-            MultipleChoiceFrage frage = fragen.get(new Random().nextInt(fragen.size()));
-
-            frage.scanner = new Scanner(System.in);
-            return frage;
+            return fragen.get(new Random().nextInt(fragen.size()));
         } catch (IOException e) {
             System.out.println("❌ Fehler beim Lesen der Datei: " + e.getMessage());
             return null;
