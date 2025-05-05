@@ -1,14 +1,24 @@
 package quiz;
 
+/**
+ * Programm, das Benutzereingaben für ein Java-Programm entgegennimmt,
+ * den Code kompiliert und überprüft, ob "Hello World" ausgegeben wird.
+ */
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.*;
 import java.nio.file.*;
 
 public class HelloWorldChecker {
+    /**
+     * Hauptmethode, die das Benutzerprogramm kompiliert, ausführt und überprüft.
+     *
+     * @param args die Konsolenargumente
+     * @throws IOException falls ein Fehler beim Datei-Handling auftritt
+     * @throws InterruptedException falls der Prozess unterbrochen wird
+     */
     public static void main(String[] args) throws IOException, InterruptedException {
-        // 1. Benutzer-Eingabe
-        System.out.println("Bitte gib dein Java-Programm ein (Ende mit einer Leerzeile):");
+        System.out.println("Bitte gib dein Hello-World Java-Programm ein (Ende mit einer Leerzeile):");
 
         BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sourceCode = new StringBuilder();
@@ -18,13 +28,10 @@ public class HelloWorldChecker {
             sourceCode.append(line).append(System.lineSeparator());
         }
 
-        String className = "UserProgram";
+        String className = "HelloWorld";
         Path sourceFile = Paths.get(className + ".java");
-
-        // 2. Quellcode speichern
         Files.writeString(sourceFile, sourceCode.toString());
 
-        // 3. Kompilieren (explizit auf Java 17 eingestellt)
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         ByteArrayOutputStream errStream = new ByteArrayOutputStream();
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
@@ -36,7 +43,6 @@ public class HelloWorldChecker {
         } else {
             System.out.println("Kompilierung erfolgreich. Starte Programm...");
 
-            // 4. Programm ausführen
             ProcessBuilder processBuilder = new ProcessBuilder("java", className);
             processBuilder.redirectErrorStream(true);
             Process process = processBuilder.start();
@@ -52,7 +58,6 @@ public class HelloWorldChecker {
             System.out.println("Ausgabe des Programms:");
             System.out.println(programOutput.toString());
 
-            // 5. Überprüfung der Ausgabe
             if (programOutput.toString().trim().equals("Hello World")) {
                 System.out.println("✅ Aufgabe erfüllt: 'Hello World' korrekt ausgegeben!");
             } else {
@@ -60,7 +65,6 @@ public class HelloWorldChecker {
             }
         }
 
-        // 6. Aufräumen
         Files.deleteIfExists(sourceFile);
         Files.deleteIfExists(Paths.get(className + ".class"));
     }

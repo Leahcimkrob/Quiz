@@ -10,24 +10,44 @@ public class AufgabenTrainer {
         System.out.println("🎓 Willkommen beim Aufgaben-Trainer!");
 
         while (true) {
-            Aufgabe frage = MultipleChoiceFrage.zufallsfrageAusDatei(pfad);
-            if (frage == null) {
-                System.out.println("⚠️ Keine Frage verfügbar. Beende.");
-                break;
-            }
+            System.out.println("\n📋 Wähle eine Option:");
+            System.out.println("1. Multiple-Choice-Frage");
+            System.out.println("2. HelloWorldChecker");
+            System.out.println("3. Beenden");
+            System.out.print("Deine Auswahl: ");
+            String auswahl = scanner.nextLine().trim();
 
-            frage.stelleFrage();
-            frage.leseAntwort();
-            frage.pruefeAntwort();
+            switch (auswahl) {
+                case "1":
+                    Aufgabe frage = MultipleChoiceFrage.zufallsfrageAusDatei(pfad);
+                    if (frage == null) {
+                        System.out.println("⚠️ Keine Frage verfügbar.");
+                        break;
+                    }
+                    frage.stelleFrage();
+                    frage.leseAntwort();
+                    frage.pruefeAntwort();
+                    break;
 
-            System.out.print("\n↩️ Noch eine Frage? (j/n): ");
-            String antwort = scanner.nextLine().trim().toLowerCase();
-            if (!antwort.equals("j")) {
-                System.out.println("👋 Bis zum nächsten Mal!");
-                break;
+                case "2":
+                    try {
+                        // HelloWorldChecker ausführen
+                        HelloWorldChecker.main(new String[]{});
+                    } catch (Exception e) {
+                        System.out.println("❌ Fehler bei der Ausführung des HelloWorldCheckers.");
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case "3":
+                    System.out.println("👋 Bis zum nächsten Mal!");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("❌ Ungültige Auswahl. Bitte versuche es erneut.");
+                    break;
             }
         }
-
-        scanner.close();
     }
 }
