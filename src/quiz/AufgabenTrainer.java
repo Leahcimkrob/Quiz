@@ -1,18 +1,33 @@
 package quiz;
 
+import java.util.Scanner;
+
 public class AufgabenTrainer {
     public static void main(String[] args) {
-        Aufgabe aufgabe1 = new MultipleChoiceFrage(null, args, null);
-        Aufgabe aufgabe2 = new JavaProgrammFrage(null, null);
+        Scanner scanner = new Scanner(System.in);
+        String pfad = "fragen.json"; // Pfad zur JSON-Datei
 
-        aufgabe1.stelleFrage();
-        aufgabe1.leseAntwort();
-        aufgabe1.pruefeAntwort();
+        System.out.println("🎓 Willkommen beim Aufgaben-Trainer!");
 
-        System.out.println("---");
+        while (true) {
+            Aufgabe frage = MultipleChoiceFrage.zufallsfrageAusDatei(pfad);
+            if (frage == null) {
+                System.out.println("⚠️ Keine Frage verfügbar. Beende.");
+                break;
+            }
 
-        aufgabe2.stelleFrage();
-        aufgabe2.leseAntwort();
-        aufgabe2.pruefeAntwort();
+            frage.stelleFrage();
+            frage.leseAntwort();
+            frage.pruefeAntwort();
+
+            System.out.print("\n↩️ Noch eine Frage? (j/n): ");
+            String antwort = scanner.nextLine().trim().toLowerCase();
+            if (!antwort.equals("j")) {
+                System.out.println("👋 Bis zum nächsten Mal!");
+                break;
+            }
+        }
+
+        scanner.close();
     }
 }
