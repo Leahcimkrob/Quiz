@@ -12,7 +12,7 @@ new FormModel {
 			"title": "AufgabenTrainer - JavaCode"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "Bitte gib dein Hello-World Java-Programm ein (Ende mit einer Leerzeile):"
+				"text": "Frage"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 0 0,alignx center,growx 0"
 			} )
@@ -27,6 +27,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Eingabe Prüfen"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 0 2,alignx center,growx 0"
 			} )

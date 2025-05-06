@@ -1,74 +1,100 @@
-/*
- * Created by JFormDesigner on Tue May 06 14:59:49 CEST 2025
- */
-
 package quiz;
 
 import javax.swing.*;
-import net.miginfocom.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Scanner;
 
-/**
- * @author Michael
- */
-public class JavaCheckerUI extends JFrame  {
+public class JavaCheckerUI implements Aufgabe {
+    private JavaChecker javaChecker;
+    private JFrame frame;
+    private JTextArea codeInputArea;
+    private JTextField resultField;
 
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-		// Generated using JFormDesigner Evaluation license - Michael Bork
-		label1 = new JLabel();
-		scrollPane1 = new JScrollPane();
-		textArea1 = new JTextArea();
-		button1 = new JButton();
-		textField2 = new JTextField();
-		button2 = new JButton();
+    public JavaCheckerUI() {
+        javaChecker = new JavaChecker();
+        initialiereFrage(); // Initialize the question
 
-		//======== this ========
-		setTitle("AufgabenTrainer - JavaCode");
-		var contentPane = getContentPane();
-		contentPane.setLayout(new MigLayout(
-			"hidemode 3,aligny top",
-			// columns
-			"[fill]",
-			// rows
-			"[]" +
-			"[149]" +
-			"[]" +
-			"[]" +
-			"[]"));
+        // Create the main frame
+        frame = new JFrame("AufgabenTrainer - JavaCode");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(510, 380);
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
-		//---- label1 ----
-		label1.setText("Bitte gib dein Hello-World Java-Programm ein (Ende mit einer Leerzeile):");
-		contentPane.add(label1, "cell 0 0,alignx center,growx 0");
+        // Add question label
+        JLabel questionLabel = new JLabel(javaChecker.frageText);
+        frame.add(questionLabel);
 
-		//======== scrollPane1 ========
-		{
-			scrollPane1.setViewportView(textArea1);
-		}
-		contentPane.add(scrollPane1, "cell 0 1,dock center");
+        // Add text area for code input
+        codeInputArea = new JTextArea(10, 40);
+        JScrollPane scrollPane = new JScrollPane(codeInputArea);
+        frame.add(scrollPane);
 
-		//---- button1 ----
-		button1.setText("Eingabe Pr\u00fcfen");
-		contentPane.add(button1, "cell 0 2,alignx center,growx 0");
+        // Add "Eingabe Prüfen" button
+        JButton checkButton = new JButton("Eingabe Prüfen");
+        frame.add(checkButton);
 
-		//---- textField2 ----
-		textField2.setText("richtigfalsch");
-		contentPane.add(textField2, "cell 0 3,alignx center,growx 0");
+        // Add result field
+        resultField = new JTextField("richtigfalsch");
+        resultField.setEditable(false);
+        frame.add(resultField);
 
-		//---- button2 ----
-		button2.setText("Zum Hauptmen\u00fc");
-		contentPane.add(button2, "cell 0 4,alignx center,growx 0");
-		pack();
-		setLocationRelativeTo(getOwner());
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
-	}
+        // Add action listener to the check button
+        checkButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String sourceCode = codeInputArea.getText();
+                try {
+                    pruefeAntwort(sourceCode);
+                } catch (Exception ex) {
+                    resultField.setText("❌ Fehler bei der Verarbeitung.");
+                    ex.printStackTrace();
+                }
+            }
+        });
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-	// Generated using JFormDesigner Evaluation license - Michael Bork
-	private JLabel label1;
-	private JScrollPane scrollPane1;
-	private JTextArea textArea1;
-	private JButton button1;
-	private JTextField textField2;
-	private JButton button2;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
+        // Add "Zum Hauptmenü" button
+        JButton mainMenuButton = new JButton("Zum Hauptmenü");
+        frame.add(mainMenuButton);
+
+        mainMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Zurück zum Hauptmenü.");
+            }
+        });
+    }
+
+    public void show() {
+        frame.setVisible(true);
+    }
+
+    @Override
+    public void initialiereFrage() {
+        javaChecker.initialiereFrage();
+    }
+
+    @Override
+    public void stelleFrage() {
+        JOptionPane.showMessageDialog(frame, javaChecker.frageText);
+    }
+
+    @Override
+    public String leseAntwort(java.util.Scanner scanner) {
+        return codeInputArea.getText();
+    }
+
+    @Override
+    public void pruefeAntwort(String antwort) {
+        try {
+            javaChecker.pruefeAntwort(antwort);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new JavaCheckerUI().show());
+    }
 }

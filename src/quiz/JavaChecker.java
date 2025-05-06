@@ -11,7 +11,7 @@ import java.nio.file.*;
 import java.util.Scanner;
 
 public class JavaChecker implements Aufgabe {
-		private String frageText = "" ;
+		String frageText = "" ;
 		private String antwort = "" ;		
 
 	@Override
