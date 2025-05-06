@@ -11,7 +11,7 @@ public class AufgabenTrainer {
         System.out.println("📚 Willkommen beim Aufgaben-Trainer!");
 
         boolean running = true;
-		while (running ) {
+        while (running) {
             System.out.println("Welche Art von Aufgabe möchtest du lösen?");
             System.out.println("1. Multiple-Choice-Frage");
             System.out.println("2. Java-Programm überprüfen");
@@ -34,26 +34,25 @@ public class AufgabenTrainer {
                     javaChecker.pruefeAntwort(antwort);
                     continue;
                 case "3":
-                	Aufgabe javaCheckerBack = new JavaCheckerBack(); // JavaChecker wird verwendet
+                    Aufgabe javaCheckerBack = new JavaCheckerBack(); // JavaChecker wird verwendet
                     javaCheckerBack.initialiereFrage();
                     javaCheckerBack.stelleFrage();
-                    String antwort = javaCheckerBack.leseAntwort(scanner);
-                    javaCheckerBack.pruefeAntwort(antwort);
+                    String antwortBack = javaCheckerBack.leseAntwort(scanner); // Zeile 40
+                    javaCheckerBack.pruefeAntwort(antwortBack);
                     continue;
                 case "4":
                     MCQuizMenu.main(new String[] {}); // Start MCQuizMenu
                     continue;
                 case "5":
-                	running = false;
-                	System.out.println("👋 Bis zum nächsten Mal!");
-                	break;
+                    running = false;
+                    System.out.println("👋 Bis zum nächsten Mal!");
+                    break;
                 default:
                     System.out.println("❌ Ungültige Auswahl. Bitte versuche es erneut.");
                     break;
             }
-
         }
 
-//        scanner.close();
+        scanner.close(); // Scanner sollte geschlossen werden, um Ressourcen freizugeben
     }
 }
