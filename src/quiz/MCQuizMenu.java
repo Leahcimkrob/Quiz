@@ -38,7 +38,8 @@ public class MCQuizMenu {
                     break;
                 case "5":
                     running = false;
-                    System.out.println("👋 Programm wird beendet.");
+                    System.out.print("");
+//                    System.out.println("👋 Programm wird beendet.");
                     break;
                 default:
                     System.out.println("⚠️ Ungültige Auswahl! Bitte 1–5 eingeben.");
