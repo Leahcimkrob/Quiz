@@ -7,17 +7,18 @@ public class AufgabenTrainer {
         Scanner scanner = new Scanner(System.in);
         String pfad = "fragen.json"; // Pfad zur JSON-Datei
 
-        System.out.println("🎓 Willkommen beim Aufgaben-Trainer!");
+        System.out.println("📚 Willkommen beim Aufgaben-Trainer!");
 
         while (true) {
             System.out.println("Welche Art von Aufgabe möchtest du lösen?");
             System.out.println("1. Multiple-Choice-Frage");
             System.out.println("2. Java-Programm überprüfen");
-            System.out.print("Bitte wähle (1/2): ");
+            System.out.println("3. Fragen bearbeiten starten");
+            System.out.print("Bitte wähle (1 - 3): ");
 
             String wahl = scanner.nextLine().trim();
 
-            Aufgabe frage;
+            Aufgabe frage = null; // Standardinitialisierung der Variable
 
             switch (wahl) {
                 case "1":
@@ -31,16 +32,22 @@ public class AufgabenTrainer {
                 case "2":
                     frage = new JavaChecker(); // JavaChecker wird verwendet
                     break;
+                case "3":
+                    MCQuizMenu.main(new String[] {}); // Start MCQuizMenu
+                    continue; // Zurück zum Hauptmenü nach Schließen
                 default:
                     System.out.println("❌ Ungültige Auswahl. Bitte versuche es erneut.");
                     continue;
             }
 
-            frage.initialiereFrage(); // Initialisierung der Aufgabe
-            frage.stelleFrage(); // Aufgabe stellen
+            // Sicherstellen, dass frage nicht null ist, bevor sie verwendet wird
+            if (frage != null) {
+                frage.initialiereFrage(); // Initialisierung der Aufgabe
+                frage.stelleFrage(); // Aufgabe stellen
 
-            String antwort = frage.leseAntwort(scanner); // Antwort einlesen
-            frage.pruefeAntwort(antwort); // Antwort prüfen
+                String antwort = frage.leseAntwort(scanner); // Antwort einlesen
+                frage.pruefeAntwort(antwort); // Antwort prüfen
+            }
 
             System.out.print("\n↩️ Noch eine Aufgabe? (j/n): ");
             String erneut = scanner.nextLine().trim().toLowerCase();
