@@ -15,9 +15,10 @@ public class AufgabenTrainer {
             System.out.println("Welche Art von Aufgabe möchtest du lösen?");
             System.out.println("1. Multiple-Choice-Frage");
             System.out.println("2. Java-Programm überprüfen");
-            System.out.println("3. Fragen bearbeiten starten");
-            System.out.println("4. Beenden");
-            System.out.print("Bitte wähle (1 - 4): ");
+            System.out.println("3. Was macht der Code");
+            System.out.println("4. Fragen bearbeiten starten");
+            System.out.println("5. Beenden");
+            System.out.print("Bitte wähle (1 - 5): ");
 
             String wahl = scanner.nextLine().trim();
 
@@ -33,9 +34,16 @@ public class AufgabenTrainer {
                     javaChecker.pruefeAntwort(antwort);
                     continue;
                 case "3":
-                    MCQuizMenu.main(new String[] {}); // Start MCQuizMenu
+                	Aufgabe javaCheckerBack = new JavaCheckerBack(); // JavaChecker wird verwendet
+                    javaCheckerBack.initialiereFrage();
+                    javaCheckerBack.stelleFrage();
+                    String antwort = javaCheckerBack.leseAntwort(scanner);
+                    javaCheckerBack.pruefeAntwort(antwort);
                     continue;
                 case "4":
+                    MCQuizMenu.main(new String[] {}); // Start MCQuizMenu
+                    continue;
+                case "5":
                 	running = false;
                 	System.out.println("👋 Bis zum nächsten Mal!");
                 	break;
