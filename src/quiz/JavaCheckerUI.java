@@ -1,103 +1,72 @@
+/*
+ * Created by JFormDesigner on Wed May 07 11:04:09 CEST 2025
+ */
+
 package quiz;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import net.miginfocom.swing.*;
 
-public class JavaCheckerUI implements Aufgabe {
-    private JavaChecker javaChecker;
-    private JFrame frame;
-    private JTextArea codeInputArea;
-    private JTextArea resultArea; // Changed from JTextField to JTextArea
+/**
+ * @author mbor193
+ */
+public class JavaCheckerUI extends JPanel {
+	public JavaCheckerUI() {
+		initComponents();
+	}
 
-    public JavaCheckerUI() {
-        javaChecker = new JavaChecker();
-        initialiereFrage(); // Initialize the question
+	private void initComponents() {
+		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
+		// Generated using JFormDesigner Evaluation license - Michael Bork
+		label1 = new JLabel();
+		textArea1 = new JTextArea();
+		button1 = new JButton();
+		scrollPane1 = new JScrollPane();
+		textArea2 = new JTextArea();
 
-        // Create the main frame
-        frame = new JFrame("AufgabenTrainer - JavaCode");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(510, 380);
-        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		//======== this ========
+		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
+		border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER
+		, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font
+		.BOLD ,12 ), java. awt. Color. red) , getBorder( )) );  addPropertyChangeListener (
+		new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r"
+		.equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+		setLayout(new MigLayout(
+			"hidemode 3,alignx center",
+			// columns
+			"[334,fill]",
+			// rows
+			"[]" +
+			"[152]" +
+			"[]" +
+			"[79]"));
 
-        // Add question label
-        JLabel questionLabel = new JLabel(javaChecker.frageText);
-        frame.add(questionLabel);
+		//---- label1 ----
+		label1.setText("Frage");
+		add(label1, "cell 0 0,alignx center,growx 0");
+		add(textArea1, "cell 0 1,dock center");
 
-        // Add text area for code input
-        codeInputArea = new JTextArea(10, 40);
-        JScrollPane scrollPane = new JScrollPane(codeInputArea);
-        frame.add(scrollPane);
+		//---- button1 ----
+		button1.setText("Eingabe Pr\u00fcfen");
+		add(button1, "cell 0 2");
 
-        // Add "Eingabe Prüfen" button
-        JButton checkButton = new JButton("Eingabe Prüfen");
-        frame.add(checkButton);
+		//======== scrollPane1 ========
+		{
 
-        // Add result area (multi-line text field with scroll pane)
-        resultArea = new JTextArea(5, 40);
-        resultArea.setEditable(false); // Make it non-editable
-        resultArea.setLineWrap(true); // Enable line wrapping
-        resultArea.setWrapStyleWord(true); // Wrap at word boundaries
-        JScrollPane resultScrollPane = new JScrollPane(resultArea);
-        frame.add(resultScrollPane);
+			//---- textArea2 ----
+			textArea2.setText("ausgabe");
+			scrollPane1.setViewportView(textArea2);
+		}
+		add(scrollPane1, "cell 0 3,dock center");
+		// JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
+	}
 
-        // Add action listener to the check button
-        checkButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String sourceCode = codeInputArea.getText();
-                try {
-                    // Call the pruefeAntwortExeption method and display the output in resultArea
-                    String output = javaChecker.pruefeAntwortExeption(sourceCode);
-                    resultArea.setText(output); // Set the output with line breaks
-                } catch (Exception ex) {
-                    resultArea.setText("❌ Fehler bei der Verarbeitung.");
-                    ex.printStackTrace();
-                }
-            }
-        });
-
-        // Add "Zum Hauptmenü" button
-        JButton mainMenuButton = new JButton("Zum Hauptmenü");
-        frame.add(mainMenuButton);
-
-        mainMenuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "Zurück zum Hauptmenü.");
-            }
-        });
-    }
-
-    public void show() {
-        frame.setVisible(true);
-    }
-
-    @Override
-    public void initialiereFrage() {
-        javaChecker.initialiereFrage();
-    }
-
-    @Override
-    public void stelleFrage() {
-        JOptionPane.showMessageDialog(frame, javaChecker.frageText);
-    }
-
-    @Override
-    public String leseAntwort(java.util.Scanner scanner) {
-        return codeInputArea.getText();
-    }
-
-    @Override
-    public void pruefeAntwort(String antwort) {
-        try {
-            javaChecker.pruefeAntwort(antwort);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new JavaCheckerUI().show());
-    }
+	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+	// Generated using JFormDesigner Evaluation license - Michael Bork
+	private JLabel label1;
+	private JTextArea textArea1;
+	private JButton button1;
+	private JScrollPane scrollPane1;
+	private JTextArea textArea2;
+	// JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

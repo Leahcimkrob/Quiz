@@ -1,51 +1,43 @@
-JFDML JFormDesigner: "8.2.3.0.386" Java: "21.0.7" encoding: "UTF-8"
+JFDML JFormDesigner: "8.2.3.0.386" Java: "21.0.6" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
-			"$layoutConstraints": "hidemode 3,aligny top"
-			"$columnConstraints": "[fill]"
-			"$rowConstraints": "[][149][][][]"
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3,alignx center"
+			"$columnConstraints": "[334,fill]"
+			"$rowConstraints": "[][152][][79]"
 		} ) {
 			name: "this"
-			"title": "AufgabenTrainer - JavaCode"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Frage"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 0 0,alignx center,growx 0"
 			} )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "scrollPane1"
-				add( new FormComponent( "javax.swing.JTextArea" ) {
-					name: "textArea1"
-				} )
+			add( new FormComponent( "javax.swing.JTextArea" ) {
+				name: "textArea1"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 0 1,dock center"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Eingabe Prüfen"
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1", true ) )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 2,alignx center,growx 0"
+				"value": "cell 0 2"
 			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField2"
-				"text": "richtigfalsch"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea2"
+					"text": "ausgabe"
+				} )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 3,alignx center,growx 0"
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button2"
-				"text": "Zum Hauptmenü"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 4,alignx center,growx 0"
+				"value": "cell 0 3,dock center"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 10 )
-			"size": new java.awt.Dimension( 510, 380 )
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 400 )
 		} )
 	}
 }
