@@ -63,7 +63,7 @@ new FormModel {
 				"value": "cell 0 6"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
+			"location": new java.awt.Point( 255, 40 )
 			"size": new java.awt.Dimension( 400, 300 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
