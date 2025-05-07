@@ -13,6 +13,8 @@ import net.miginfocom.swing.*;
  */
 public class JavaCheckerUI extends JPanel {
     private JavaChecker javaChecker;
+    private String currentQuestion; // Speichert die aktuelle Frage
+    private String currentAnswer;   // Speichert die aktuelle Antwort
 
     public JavaCheckerUI() {
         javaChecker = new JavaChecker(); // Initialize JavaChecker instance
@@ -23,7 +25,9 @@ public class JavaCheckerUI extends JPanel {
     private void initAufgabe() {
         // Initialize the first question
         javaChecker.initialiereFrage();
-        label1.setText(javaChecker.frageText); // Display question text in textArea1
+        currentQuestion = javaChecker.frageText; // Speichert die Frage in der Instanzvariable
+        currentAnswer = javaChecker.antwort; // Speichert die Antwort in der Instanzvariable (angenommen es gibt diese Methode)
+        label1.setText(currentQuestion); // Display question text in textArea1
     }
 
 	private void buttonCheckeAufgabe(ActionEvent e) {

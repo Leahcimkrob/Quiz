@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class JavaChecker implements Aufgabe {
     String frageText = "";
-    private String antwort = "";
+    String antwort = "";
 
 	@Override
     public void initialiereFrage() {
