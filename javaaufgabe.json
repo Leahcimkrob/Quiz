@@ -1,0 +1,14 @@
+[
+    {
+        "1": {
+            "Aufgabe": "Schreiben Sie ein Programm, das 'Hello World' ausgibt.",
+            "erwartete Ausgabe": "Hello World"
+        }
+    },
+    {
+        "2": {
+            "Aufgabe": "Schreiben Sie ein Programm, das das Ergebniss von 15+12' ausgibt.",
+            "erwartete Ausgabe": "27"
+        }
+    }
+]
