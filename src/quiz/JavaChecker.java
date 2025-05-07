@@ -14,7 +14,7 @@ public class JavaChecker implements Aufgabe {
     String frageText = "";
     private String antwort = "";
 
-    @Override
+	@Override
     public void initialiereFrage() {
         try {
             // JSON-Datei einlesen

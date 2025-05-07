@@ -12,19 +12,32 @@ import net.miginfocom.swing.*;
  * @author mbor193
  */
 public class JavaCheckerUI extends JPanel {
-	public JavaCheckerUI() {
-		initComponents();
-		initAufgabe();		
-	}
- 
-	private void initAufgabe() {
-		// TODO Auto-generated method stub
-		
-	}
+    private JavaChecker javaChecker;
+
+    public JavaCheckerUI() {
+        javaChecker = new JavaChecker(); // Initialize JavaChecker instance
+        initComponents();
+        initAufgabe();        
+    }
+
+    private void initAufgabe() {
+        // Initialize the first question
+        javaChecker.initialiereFrage();
+        label1.setText(javaChecker.frageText); // Display question text in textArea1
+    }
 
 	private void buttonCheckeAufgabe(ActionEvent e) {
-		// TODO add your code here
-	}
+        try {
+            String sourceCode = "";
+			// Call the pruefeAntwortExeption method and display the output in resultArea
+            String output = javaChecker.pruefeAntwortExeption(sourceCode);
+            textArea2.setText(output); // Set the output with line breaks
+        } catch (Exception ex) {
+            textArea2.setText("❌ Fehler bei der Verarbeitung.");
+            ex.printStackTrace();
+        }
+    }
+
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
