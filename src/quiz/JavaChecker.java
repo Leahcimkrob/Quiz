@@ -36,51 +36,56 @@ public class JavaChecker implements Aufgabe {
 		return sourceCode.toString();
 	}
 
-	public void pruefeAntwortExeption(String sourceCode) throws IOException, InterruptedException {
-		String line ="";
-        String className = "HelloWorld";
-        Path sourceFile = Paths.get(className + ".java");
-        Files.writeString(sourceFile, sourceCode.toString());
+	public String pruefeAntwortExeption(String sourceCode) throws IOException, InterruptedException {
+	    String line = "";
+	    String className = "HelloWorld";
+	    Path sourceFile = Paths.get(className + ".java");
+	    Files.writeString(sourceFile, sourceCode);
 
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-        ByteArrayOutputStream errStream = new ByteArrayOutputStream();
-        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        int compileResult = compiler.run(null, outStream, errStream, "--release", "17", sourceFile.toString());
+	    ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+	    ByteArrayOutputStream errStream = new ByteArrayOutputStream();
+	    JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+	    int compileResult = compiler.run(null, outStream, errStream, "--release", "17", sourceFile.toString());
 
-        if (compileResult != 0) {
-            System.out.println("Kompilierungsfehler:");
-            System.out.println(errStream.toString());
-        } else {
-            System.out.println("Kompilierung erfolgreich. Starte Programm...");
+	    StringBuilder output = new StringBuilder();
 
-            ProcessBuilder processBuilder = new ProcessBuilder("java", className);
-            processBuilder.redirectErrorStream(true);
-            Process process = processBuilder.start();
+	    if (compileResult != 0) {
+	        output.append("Kompilierungsfehler:\n");
+	        output.append(errStream.toString());
+	    } else {
+	        output.append("Kompilierung erfolgreich. Starte Programm...\n");
 
-            StringBuilder programOutput = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-                while ((line = reader.readLine()) != null) {
-                    programOutput.append(line).append(System.lineSeparator());
-                }
-            }
+	        ProcessBuilder processBuilder = new ProcessBuilder("java", className);
+	        processBuilder.redirectErrorStream(true);
+	        Process process = processBuilder.start();
 
-            int exitCode = process.waitFor();
-            System.out.println("Ausgabe des Programms:");
-            System.out.println(programOutput.toString());
+	        StringBuilder programOutput = new StringBuilder();
+	        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+	            while ((line = reader.readLine()) != null) {
+	                programOutput.append(line).append(System.lineSeparator());
+	            }
+	        }
 
-            if (programOutput.toString().trim().equals("Hello World")) {
-                System.out.println("✅ Aufgabe erfüllt: 'Hello World' korrekt ausgegeben!");
-            } else {
-                System.out.println("❌ Aufgabe nicht korrekt gelöst.");
-            }
-        }
+	        int exitCode = process.waitFor();
+	        output.append("Ausgabe des Programms:\n");
+	        output.append(programOutput.toString());
 
-        Files.deleteIfExists(sourceFile);
-        Files.deleteIfExists(Paths.get(className + ".class"));
+	        if (programOutput.toString().trim().equals("Hello World")) {
+	            output.append("\n✅ Aufgabe erfüllt: 'Hello World' korrekt ausgegeben!");
+	        } else {
+	            output.append("\n❌ Aufgabe nicht korrekt gelöst.");
+	        }
+	    }
 
-		
+	    Files.deleteIfExists(sourceFile);
+	    Files.deleteIfExists(Paths.get(className + ".class"));
+
+	    // Ausgabe in der Konsole
+	    System.out.println(output.toString());
+
+	    // Rückgabe der Ausgabe als String	    
+	    return output.toString();
 	}
-
 	@Override
 	public String leseAntwort(Scanner scanner) {
 		try {

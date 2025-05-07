@@ -3,14 +3,12 @@ package quiz;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.Scanner;
 
 public class JavaCheckerUI implements Aufgabe {
     private JavaChecker javaChecker;
     private JFrame frame;
     private JTextArea codeInputArea;
-    private JTextField resultField;
+    private JTextArea resultArea; // Changed from JTextField to JTextArea
 
     public JavaCheckerUI() {
         javaChecker = new JavaChecker();
@@ -35,10 +33,13 @@ public class JavaCheckerUI implements Aufgabe {
         JButton checkButton = new JButton("Eingabe Prüfen");
         frame.add(checkButton);
 
-        // Add result field
-        resultField = new JTextField("richtigfalsch");
-        resultField.setEditable(false);
-        frame.add(resultField);
+        // Add result area (multi-line text field with scroll pane)
+        resultArea = new JTextArea(5, 40);
+        resultArea.setEditable(false); // Make it non-editable
+        resultArea.setLineWrap(true); // Enable line wrapping
+        resultArea.setWrapStyleWord(true); // Wrap at word boundaries
+        JScrollPane resultScrollPane = new JScrollPane(resultArea);
+        frame.add(resultScrollPane);
 
         // Add action listener to the check button
         checkButton.addActionListener(new ActionListener() {
@@ -46,9 +47,11 @@ public class JavaCheckerUI implements Aufgabe {
             public void actionPerformed(ActionEvent e) {
                 String sourceCode = codeInputArea.getText();
                 try {
-                    pruefeAntwort(sourceCode);
+                    // Call the pruefeAntwortExeption method and display the output in resultArea
+                    String output = javaChecker.pruefeAntwortExeption(sourceCode);
+                    resultArea.setText(output); // Set the output with line breaks
                 } catch (Exception ex) {
-                    resultField.setText("❌ Fehler bei der Verarbeitung.");
+                    resultArea.setText("❌ Fehler bei der Verarbeitung.");
                     ex.printStackTrace();
                 }
             }
