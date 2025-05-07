@@ -1,14 +1,14 @@
 [
     {
         "1": {
-            "Aufgabe": "Schreiben Sie ein Programm, das 'Hello World' ausgibt.",
-            "erwartete Ausgabe": "Hello World"
+            "Frage": "Schreiben Sie ein Programm, das 'Hello World' ausgibt.",
+            "Antwort": "Hello World"
         }
     },
     {
         "2": {
-            "Aufgabe": "Schreiben Sie ein Programm, das das Ergebniss von 15+12' ausgibt.",
-            "erwartete Ausgabe": "27"
+            "Frage": "Schreiben Sie ein Programm, das das Ergebnis von '15+12' ausgibt.",
+            "Antwort": "27"
         }
     }
 ]
