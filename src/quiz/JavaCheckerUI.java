@@ -14,6 +14,12 @@ import net.miginfocom.swing.*;
 public class JavaCheckerUI extends JPanel {
 	public JavaCheckerUI() {
 		initComponents();
+		initAufgabe();		
+	}
+ 
+	private void initAufgabe() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void buttonCheckeAufgabe(ActionEvent e) {
