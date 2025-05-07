@@ -34,12 +34,12 @@ public class MCFragenBeantwortenUI extends JPanel {
 		textField2 = new JTextField();
 
 		//======== this ========
-		setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
-		EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax. swing .border . TitledBorder. CENTER ,javax . swing
-		. border .TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,
-		java . awt. Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
-		{ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order" .equals ( e. getPropertyName () ) )
-		throw new RuntimeException( ) ;} } );
+		setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.
+		EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax.swing
+		.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,12),
+		java.awt.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener()
+		{@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order".equals(e.getPropertyName()))
+		throw new RuntimeException();}});
 		setLayout(new MigLayout(
 			"hidemode 3",
 			// columns
@@ -55,7 +55,7 @@ public class MCFragenBeantwortenUI extends JPanel {
 
 		//---- textField1 ----
 		textField1.setText("Frage");
-		add(textField1, "cell 0 0");
+		add(textField1, "cell 0 0,alignx center,growx 0");
 
 		//---- radioButton1 ----
 		radioButton1.setText("Antwort1");
@@ -83,6 +83,7 @@ public class MCFragenBeantwortenUI extends JPanel {
 
 		//---- textField2 ----
 		textField2.setText("Antwort");
+		textField2.setEditable(false);
 		add(textField2, "cell 0 6");
 
 		//---- buttonGroup1 ----
