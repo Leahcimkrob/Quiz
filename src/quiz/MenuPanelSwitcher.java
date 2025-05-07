@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class MenuPanelSwitcher extends JFrame {
     private JPanel panelStart;
     private JPanel panelFragen;
-    private JPanel panelEinstellungen;
+    private JavaChecker panelEinstellungen;
     private JPanel contentPanel;
 
     public MenuPanelSwitcher() {
@@ -22,10 +22,9 @@ public class MenuPanelSwitcher extends JFrame {
         panelStart = new JPanel();
         panelStart.add(new JLabel("Startseite"));
 
-        panelFragen = new JPanel();
-        panelFragen.add(new JLabel("Fragenverwaltung"));
+  //      panelFragen = "";
 
-        panelEinstellungen = new MCFragenBeantwortenUI();
+        panelEinstellungen = new JavaChecker();
 //        panelEinstellungen.add(new JLabel("Einstellungen"));
 
         setJMenuBar(createMenu());
@@ -39,8 +38,8 @@ public class MenuPanelSwitcher extends JFrame {
 
         JMenu menu = new JMenu("Navigation");
         JMenuItem itemStart = new JMenuItem("Start");
-        JMenuItem itemFragen = new JMenuItem("Fragen");
-        JMenuItem itemEinstellungen = new JMenuItem("Einstellungen");
+        JMenuItem itemFragen = new JMenuItem("MC-Frage");
+        JMenuItem itemEinstellungen = new JMenuItem("Programmieraufgabe");
 
         itemStart.addActionListener(e -> showPanel(panelStart));
         itemFragen.addActionListener(e -> showPanel(panelFragen));
@@ -54,9 +53,9 @@ public class MenuPanelSwitcher extends JFrame {
         return menuBar;
     }
 
-    private void showPanel(JPanel panel) {
+    private void showPanel(JavaChecker panelEinstellungen2) {
         contentPanel.removeAll();
-        contentPanel.add(panel);
+        contentPanel.add(panelEinstellungen2);
         contentPanel.revalidate();
         contentPanel.repaint();
     }
