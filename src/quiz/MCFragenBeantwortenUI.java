@@ -13,7 +13,7 @@ import net.miginfocom.swing.*;
 public class MCFragenBeantwortenUI extends JPanel {
 	public MCFragenBeantwortenUI() {
 		initComponents();
-		initFrage()
+		initFrage();
 	}
 
 	private void initFrage() {
