@@ -7,6 +7,7 @@ public class AufgabenTrainerUI extends JFrame {
     private JPanel panelStart;
     private JPanel panelFragen;
     private JPanel panelJavaCode;
+    private JPanel panelJavaFrage; // Neuer Panel für das zweite Menü
     private JPanel contentPanel;
 
     public AufgabenTrainerUI() {
@@ -27,6 +28,8 @@ public class AufgabenTrainerUI extends JFrame {
 
         panelJavaCode = new JavaCheckerUI();
 
+        panelJavaFrage = new JavaFrageAnzeigeUI();
+
         setJMenuBar(createMenuBar());
 
         showPanel(panelStart);
@@ -37,21 +40,30 @@ public class AufgabenTrainerUI extends JFrame {
         JMenuBar menuBar = new JMenuBar();
 
         // Erstes Menü: Navigation
-        JMenu navigationMenu = new JMenu("Navigation");
+        JMenu navigationMenu1 = new JMenu("Navigation");
         JMenuItem itemStart = new JMenuItem("Start");
         JMenuItem itemFragen = new JMenuItem("MC-Frage");
-        JMenuItem itemEinstellungen = new JMenuItem("Programmieraufgabe");
+        JMenuItem itemJavaCode = new JMenuItem("Programmieraufgabe");
 
         itemStart.addActionListener(e -> showPanel(panelStart));
         itemFragen.addActionListener(e -> showPanel(panelFragen));
-        itemEinstellungen.addActionListener(e -> showPanel(panelJavaCode));
+        itemJavaCode.addActionListener(e -> showPanel(panelJavaCode));
 
-        navigationMenu.add(itemStart);
-        navigationMenu.add(itemFragen);
-        navigationMenu.add(itemEinstellungen);
+        navigationMenu1.add(itemStart);
+        navigationMenu1.add(itemFragen);
+        navigationMenu1.add(itemJavaCode);
 
-        menuBar.add(navigationMenu);
+        menuBar.add(navigationMenu1);
 
+        // Zweites Menü: Zusatz
+        JMenu navigationMenu2 = new JMenu("Bearbeiten");
+        JMenuItem itemFrageJava = new JMenuItem("JavaFrage");
+
+        itemFrageJava.addActionListener(e -> showPanel(panelJavaFrage)); // Aktion für das zweite Menü
+
+        navigationMenu2.add(itemFrageJava);
+
+        menuBar.add(navigationMenu2); // Füge das zweite Menü hinzu
 
         return menuBar;
     }
