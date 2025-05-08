@@ -48,4 +48,10 @@ public class JavaCheckerBack implements Aufgabe {
 		}
 	}
 
+	@Override
+	public void initialisiereNummer() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

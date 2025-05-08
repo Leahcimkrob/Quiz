@@ -19,9 +19,16 @@ public class JavaCheckerUI extends JPanel {
     public JavaCheckerUI() {
         javaChecker = new JavaChecker(); // Initialize JavaChecker instance
         initComponents();
+        initNummer();
         initAufgabe();        
     }
 
+    private void initNummer() {
+        // Initialize the firs
+
+  
+    }
+    
     private void initAufgabe() {
         // Initialize the first question
         javaChecker.initialiereFrage();

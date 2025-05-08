@@ -8,12 +8,38 @@ import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.*;
 import java.nio.file.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class JavaChecker implements Aufgabe {
     String frageText = "";
     String antwort = "";
 
+	@Override
+	public void initialisiereNummer() {
+        try {
+            // Parse the JSON file
+            Gson gson = new Gson();
+            Reader reader = new FileReader("javaaufgabe.json");
+            JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
+
+            // Extract all numbers
+            Integer[] numbers = new Integer[jsonArray.size()];
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JsonObject task = jsonArray.get(i).getAsJsonObject();
+                String key = task.keySet().iterator().next(); // Get the first key
+                numbers[i] = Integer.parseInt(key); // Convert key to integer
+            }
+
+            // Print the numbers (or use them as needed)
+            System.out.println("Extracted numbers: " + Arrays.toString(numbers));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		
+	}    
+    
+    
 	@Override
     public void initialiereFrage() {
         try {
@@ -170,4 +196,6 @@ public class JavaChecker implements Aufgabe {
         System.out.println(output.toString());
         return output.toString();
     }
+
+
 }

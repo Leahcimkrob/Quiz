@@ -102,4 +102,10 @@ public class MultipleChoiceFrage implements Aufgabe {
     	return correctOption;
     	}
 
+	@Override
+	public void initialisiereNummer() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

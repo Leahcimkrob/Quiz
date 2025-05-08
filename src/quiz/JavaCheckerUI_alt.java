@@ -102,4 +102,10 @@ public class JavaCheckerUI_alt implements Aufgabe {
         SwingUtilities.invokeLater(() -> new JavaCheckerUI_alt().show());
     }
 
+	@Override
+	public void initialisiereNummer() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
