@@ -2,6 +2,7 @@ package quiz;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import javax.tools.JavaCompiler;
@@ -40,6 +41,32 @@ public class JavaChecker implements Aufgabe {
         }
     }
 
+    public void initialiereFrage(int aufgabenNummer) {
+        try {
+            // JSON-Datei einlesen
+            Gson gson = new Gson();
+            Reader reader = new FileReader("javaaufgabe.json");
+            JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
+
+            // Suche die Aufgabe mit der übergebenen Nummer
+            for (JsonElement element : jsonArray) {
+                JsonObject task = element.getAsJsonObject();
+                if (task.has(String.valueOf(aufgabenNummer))) {
+                    JsonObject taskDetails = task.getAsJsonObject(String.valueOf(aufgabenNummer));
+                    currentTaskNumber = aufgabenNummer; // Setze die aktuelle Aufgaben-Nummer
+                    frageText = taskDetails.get("Frage").getAsString(); // Frage
+                    antwort = taskDetails.get("Antwort").getAsString(); // Erwartete Antwort
+                    break;
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            frageText = "Fehler beim Laden der Aufgabe.";
+            antwort = "";
+        }
+    }
+    
     @Override
     public void initialiereFrage() {
         try {

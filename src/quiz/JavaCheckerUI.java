@@ -8,20 +8,37 @@ public class JavaCheckerUI extends JPanel {
     private JavaChecker javaChecker;
     private String currentQuestion; // Speichert die aktuelle Frage
     private String currentAnswer;   // Speichert die aktuelle Antwort
+    private int currentTaskIndex;   // Index der aktuellen Aufgabe im Array
 
     public JavaCheckerUI() {
         javaChecker = new JavaChecker(); // Initialize JavaChecker instance
-        
+        currentTaskIndex = 0; // Start mit der ersten Aufgabe
+
         // Init numbers first
         initNummern(); // Nummern der Aufgaben werden zuerst geladen
-        
+
         initComponents();
         initAufgabe(); // Danach wird die erste Aufgabe geladen
     }
 
     private void initAufgabe() {
-        // Initialisiert die erste Aufgabe
-        javaChecker.initialiereFrage();
+        // Nullprüfung für aufgabenNummern hinzufügen
+        if (javaChecker.aufgabenNummern == null || javaChecker.aufgabenNummern.length == 0) {
+            System.out.println("Keine Aufgaben-Nummern verfügbar oder Array ist null.");
+            return;
+        }
+
+        // Sicherstellen, dass der Index innerhalb der Grenzen des Arrays liegt
+        if (currentTaskIndex < 0 || currentTaskIndex >= javaChecker.aufgabenNummern.length) {
+            System.out.println("Ungültiger Aufgaben-Index: " + currentTaskIndex);
+            return;
+        }
+
+        // Aufgaben-Nummer aus dem Array aufgabenNummern lesen
+        int aufgabenNummer = javaChecker.aufgabenNummern[currentTaskIndex];
+
+        // Initialisiert die Aufgabe basierend auf der aktuellen Nummer
+        javaChecker.initialiereFrage(aufgabenNummer);
         currentQuestion = javaChecker.frageText; // Speichert die Frage in der Instanzvariable
         currentAnswer = javaChecker.antwort; // Speichert die Antwort in der Instanzvariable
         int currentTaskNumber = javaChecker.currentTaskNumber; // Holt die Nummer der aktuellen Aufgabe
@@ -44,7 +61,7 @@ public class JavaCheckerUI extends JPanel {
         for (Integer nummer : aufgabenNummern) {
             System.out.println(nummer);
         }
- 
+
         // Alternativ: Die Nummern könnten in der UI angezeigt werden, falls benötigt.
     }
 
@@ -58,6 +75,15 @@ public class JavaCheckerUI extends JPanel {
             textArea2.setText("❌ Fehler bei der Verarbeitung.");
             ex.printStackTrace();
         }
+    }
+
+    private void buttonNextAufgabe(ActionEvent e) {
+        // Nächste Aufgabe laden
+        currentTaskIndex++; // Index inkrementieren
+        if (currentTaskIndex >= javaChecker.aufgabenNummern.length) {
+            currentTaskIndex = 0; // Zurück zur ersten Aufgabe, wenn das Ende erreicht ist
+        }
+        initAufgabe(); // Nächste Aufgabe initialisieren
     }
 
     private void initComponents() {
@@ -103,7 +129,8 @@ public class JavaCheckerUI extends JPanel {
         add(button1, "cell 0 2,growx");
 
         //---- button2 ----
-        button2.setText("nächste Aufgabe");
+        button2.setText("Nächste Aufgabe");
+        button2.addActionListener(e -> buttonNextAufgabe(e)); // Klick-Event für Button 2
         add(button2, "cell 0 2,growx");
 
         //======== scrollPane1 ========
