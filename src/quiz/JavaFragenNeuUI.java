@@ -19,7 +19,8 @@ public class JavaFragenNeuUI extends JPanel {
         initComponents();
     }
 
-     private void addNewQuestion(ActionEvent e) {
+ 
+    private void addNewQuestion(ActionEvent e) {
         String frage = textField1.getText();
         String antwort = textField2.getText();
 
@@ -43,28 +44,28 @@ public class JavaFragenNeuUI extends JPanel {
         textField1.setText("");
         textField2.setText("");
     }
+			    private void switchToJavaFrageAnzeigeUI() {
+	        // Hole das Hauptfenster (JFrame) des aktuellen Panels
+	        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+	        if (topFrame != null) {
+	            // Entferne alle bestehenden Inhalte des Fensters
+	            topFrame.getContentPane().removeAll();
+
+	            // Erstelle ein neues JavaFrageAnzeigeUI-Panel
+	            JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
+
+	            // Füge das neue Panel zum Fenster hinzu
+	            topFrame.getContentPane().add(javaFrageAnzeigeUI);
+
+	            // Aktualisiere und rendere das Fenster neu
+	            topFrame.revalidate();
+	            topFrame.repaint();
+	        } else {
+	            System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
+	        }
+	    }		
 		
-     private void switchToJavaFrageAnzeigeUI() {
-         // Hole das Hauptfenster (JFrame) des aktuellen Panels
-         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-
-         if (topFrame != null) {
-             // Entferne alle bestehenden Inhalte des Fensters
-             topFrame.getContentPane().removeAll();
-
-             // Erstelle ein neues JavaFrageAnzeigeUI-Panel
-             JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
-
-             // Füge das neue Panel zum Fenster hinzu
-             topFrame.getContentPane().add(javaFrageAnzeigeUI);
-
-             // Aktualisiere und rendere das Fenster neu
-             topFrame.revalidate();
-             topFrame.repaint();
-         } else {
-             System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
-         }
-     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off

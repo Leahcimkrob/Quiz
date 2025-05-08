@@ -11,7 +11,7 @@ public class AufgabenTrainerUI extends JFrame {
     private JPanel contentPanel;
 
     public AufgabenTrainerUI() {
-        setTitle("Aufgaben Trainer");
+        setTitle("App mit Menü");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 640);
 
@@ -68,7 +68,7 @@ public class AufgabenTrainerUI extends JFrame {
         return menuBar;
     }
 
-    public void showPanel(JPanel panel) {
+    private void showPanel(JPanel panel) {
         contentPanel.removeAll();
         contentPanel.add(panel);
         contentPanel.revalidate();

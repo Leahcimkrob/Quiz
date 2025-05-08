@@ -48,8 +48,25 @@ public class JavaFrageAnzeigeUI extends JPanel {
     }
 
     public void addNeueFragen() {
-        // Wechsel zum Panel für neue Fragen
-        switchPanel(new JavaFragenNeuUI());
+        // Hole das Hauptfenster (JFrame) des aktuellen Panels
+        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+        if (topFrame != null) {
+            // Entferne alle bestehenden Inhalte des Fensters
+            topFrame.getContentPane().removeAll();
+
+            // Erstelle ein neues JavaFragenNeuUI-Panel
+            JavaFragenNeuUI javaFragenNeuUI = new JavaFragenNeuUI();
+
+            // Füge das neue Panel zum Fenster hinzu
+            topFrame.getContentPane().add(javaFragenNeuUI);
+
+            // Aktualisiere und rendere das Fenster neu
+            topFrame.revalidate();
+            topFrame.repaint();
+        } else {
+            System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
+        }
     }
     
     private void deleteMarkedQuestions() {
@@ -61,8 +78,25 @@ public class JavaFrageAnzeigeUI extends JPanel {
             }
         }
 
-        // Wechsel zu aktualisierter Fragenübersicht
-        switchPanel(new JavaFrageAnzeigeUI());
+        // GUI neu laden, um Änderungen anzuzeigen
+        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+        if (topFrame != null) {
+            // Entferne alle bestehenden Inhalte des Fensters
+            topFrame.getContentPane().removeAll();
+
+            // Erstelle ein neues JavaFrageAnzeigeUI-Panel
+            JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
+
+            // Füge das neue Panel zum Fenster hinzu
+            topFrame.getContentPane().add(javaFrageAnzeigeUI);
+
+            // Aktualisiere und rendere das Fenster neu
+            topFrame.revalidate();
+            topFrame.repaint();
+        } else {
+            System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
+        }
 
         // Aktualisierte Daten in JSON speichern
         try {
@@ -72,25 +106,6 @@ public class JavaFrageAnzeigeUI extends JPanel {
         }
     }
 
-
-    private void switchPanel(JPanel newPanel) {
-        // Hole das Hauptfenster (JFrame) des aktuellen Panels
-        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-
-        if (topFrame != null) {
-            // Entferne nur den zentralen Inhaltsbereich (ohne Menü)
-            topFrame.getContentPane().removeAll();
-
-            // Füge das neue Panel hinzu
-            topFrame.getContentPane().add(newPanel);
-
-            // Aktualisiere und rendere das Fenster neu
-            topFrame.revalidate();
-            topFrame.repaint();
-        } else {
-            System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
-        }
-    }
 
     private void initComponents() {
         label1 = new JLabel();
