@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class AufgabenTrainerUI extends JFrame {
     private JPanel panelStart;
     private JPanel panelFragen;
-    private JPanel panelEinstellungen;
+    private JPanel panelJavacode;
     private JPanel contentPanel;
 
     public AufgabenTrainerUI() {
@@ -22,10 +22,11 @@ public class AufgabenTrainerUI extends JFrame {
         panelStart = new JPanel();
         panelStart.add(new JLabel("Startseite"));
 
- //       panelFragen = new MCFrageVier();
-
-        panelEinstellungen = new JavaCheckerUI();
-//        panelEinstellungen.add(new JLabel("Einstellungen"));
+        // Initialisierung des Multiple-Choice-Panels
+        panelFragen = new JPanel();
+        panelFragen.add(new JLabel("Multiple-Choice-Frage"));        
+        
+        panelJavacode = new JavaCheckerUI();
 
         setJMenuBar(createMenu());
 
@@ -36,20 +37,35 @@ public class AufgabenTrainerUI extends JFrame {
     private JMenuBar createMenu() {
         JMenuBar menuBar = new JMenuBar();
 
-        JMenu menu = new JMenu("Navigation");
+        // Erstes Menü: Navigation
+        JMenu menuNavigation = new JMenu("Navigation");
         JMenuItem itemStart = new JMenuItem("Start");
         JMenuItem itemFragen = new JMenuItem("MultipleChoice-Frage");
-        JMenuItem itemEinstellungen = new JMenuItem("Programmieraufgabe");
+        JMenuItem itemJavacode = new JMenuItem("Programmieraufgabe");
 
         itemStart.addActionListener(e -> showPanel(panelStart));
         itemFragen.addActionListener(e -> showPanel(panelFragen));
-        itemEinstellungen.addActionListener(e -> showPanel(panelEinstellungen));
+        itemJavacode.addActionListener(e -> showPanel(panelJavacode));
 
-        menu.add(itemStart);
-        menu.add(itemFragen);
-        menu.add(itemEinstellungen);
+        menuNavigation.add(itemStart);
+        menuNavigation.add(itemFragen);
+        menuNavigation.add(itemJavacode);
 
-        menuBar.add(menu);
+        menuBar.add(menuNavigation);
+
+        // Zweites Menü: Einstellungen
+        JMenu menuSettings = new JMenu("Einstellungen");
+        JMenuItem itemOption1 = new JMenuItem("Option 1");
+        JMenuItem itemOption2 = new JMenuItem("Option 2");
+
+        itemOption1.addActionListener(e -> JOptionPane.showMessageDialog(this, "Option 1 ausgewählt."));
+        itemOption2.addActionListener(e -> JOptionPane.showMessageDialog(this, "Option 2 ausgewählt."));
+
+        menuSettings.add(itemOption1);
+        menuSettings.add(itemOption2);
+
+        menuBar.add(menuSettings);
+
         return menuBar;
     }
 
@@ -62,5 +78,12 @@ public class AufgabenTrainerUI extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(AufgabenTrainerUI::new);
+    }
+
+    // Dummy-Klasse für JavaCheckerUI
+    static class JavaCheckerUI extends JPanel {
+        public JavaCheckerUI() {
+            add(new JLabel("JavaCheckerUI-Panel"));
+        }
     }
 }
