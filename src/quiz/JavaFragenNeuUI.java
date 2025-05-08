@@ -4,6 +4,7 @@
 
 package quiz;
 
+import java.awt.event.*;
 import javax.swing.*;
 import net.miginfocom.swing.*;
 
@@ -11,8 +12,34 @@ import net.miginfocom.swing.*;
  * @author Michael
  */
 public class JavaFragenNeuUI extends JPanel {
-	public JavaFragenNeuUI() {
-		initComponents();
+    private JavaFragenManager fragenManager;
+    
+
+    public JavaFragenNeuUI() {
+        fragenManager = new JavaFragenManager();
+        initComponents();
+    }
+	
+
+    private void addNewQuestion() {
+        String frage = textField1.getText();
+        String antwort = textField2.getText();
+
+        if (frage.isEmpty() || antwort.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bitte Frage und Antwort eingeben.", "Fehler", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        fragenManager.addFrage(frage, antwort);
+
+        JOptionPane.showMessageDialog(this, "Frage erfolgreich hinzugefügt.", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+
+        textField1.setText("");
+        textField2.setText("");
+    }
+
+	private void addNewQuestion(ActionEvent e) {
+		// TODO add your code here
 	}
 
 	private void initComponents() {
@@ -27,12 +54,12 @@ public class JavaFragenNeuUI extends JPanel {
 		button1 = new JButton();
 
 		//======== this ========
-		setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
-		( 0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
-		.TitledBorder . BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,java . awt
-		. Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
-		propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
-		;} } );
+		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+		( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+		. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt
+		. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+		propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( )
+		; }} );
 		setLayout(new MigLayout(
 			"hidemode 3",
 			// columns
@@ -46,7 +73,7 @@ public class JavaFragenNeuUI extends JPanel {
 			"[]"));
 
 		//---- label1 ----
-		label1.setText("Neue Aufgabe nlegen");
+		label1.setText("Neue Aufgabe anlegen");
 		add(label1, "cell 0 0 2 1,alignx center,growx 0");
 
 		//---- label4 ----
@@ -65,6 +92,7 @@ public class JavaFragenNeuUI extends JPanel {
 
 		//---- button1 ----
 		button1.setText("Frage hinzuf\u00fcgen");
+		button1.addActionListener(e -> addNewQuestion(e));
 		add(button1, "cell 0 4 2 1,alignx center,growx 0");
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
 	}
