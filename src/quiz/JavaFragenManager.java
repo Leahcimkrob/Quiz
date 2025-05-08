@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JavaFragenManager implements Aufgabe {
     private final String jsonFilePath = "javaaufgabe.json";
@@ -137,24 +139,25 @@ public class JavaFragenManager implements Aufgabe {
         writer.close();
     }
 
- // Methode zum Abrufen aller Nummern, Fragen und Antworten
-    public void getAlleFragenUndAntworten() {
+    // Methode zum Abrufen aller Nummern, Fragen und Antworten
+    public List<String[]> getAlleFragenUndAntworten() {
+        List<String[]> fragenListe = new ArrayList<>();
         try {
             JsonArray jsonArray = readJsonArray();
-            System.out.println("Alle Aufgaben:");
             for (JsonElement element : jsonArray) {
                 JsonObject task = element.getAsJsonObject();
                 for (String key : task.keySet()) {
                     JsonObject taskDetails = task.getAsJsonObject(key);
                     String frage = taskDetails.get("Frage").getAsString();
                     String antwort = taskDetails.get("Antwort").getAsString();
-                    System.out.printf("Nummer: %s, Frage: %s, Antwort: %s%n", key, frage, antwort);
+                    fragenListe.add(new String[]{key, frage, antwort});
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }    
+        return fragenListe;
+    } 
     
     @Override
     public void initialisiereNummer() {

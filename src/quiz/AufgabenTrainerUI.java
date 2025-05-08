@@ -56,35 +56,33 @@ public class AufgabenTrainerUI extends JFrame {
         // Zweites Menü: Einstellungen
         JMenu menuSettings = new JMenu("Einstellungen");
         JMenuItem itemOption1 = new JMenuItem("Option 1");
-        JMenu itemOption2 = new JMenu("Java-Aufgaben"); // Convert Option 2 to a JMenu for a submenu
+        JMenu itemOption2 = new JMenu("Java-Aufgaben");
 
-        // Add submenu items to Option 2
+        // Unteroptionen hinzufügen
         JMenuItem subItem1 = new JMenuItem("Unteroption 1");
         JMenuItem subItem2 = new JMenuItem("Unteroption 2");
         JMenuItem subItem3 = new JMenuItem("Unteroption 3");
         JMenuItem subItem4 = new JMenuItem("Anzeigen und löschen");
-        
+
         subItem1.addActionListener(e -> JOptionPane.showMessageDialog(this, "Unteroption 1 ausgewählt."));
         subItem2.addActionListener(e -> JOptionPane.showMessageDialog(this, "Unteroption 2 ausgewählt."));
         subItem3.addActionListener(e -> JOptionPane.showMessageDialog(this, "Unteroption 3 ausgewählt."));
         subItem4.addActionListener(e -> {
-            JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
-            javaFrageAnzeigeUI.setVisible(true);
+            showPanel(new JavaFrageAnzeigeUI());
         });
 
         itemOption2.add(subItem1);
         itemOption2.add(subItem2);
         itemOption2.add(subItem3);
         itemOption2.add(subItem4);
-        
+
         menuSettings.add(itemOption1);
         menuSettings.add(itemOption2);
-        
+
         menuBar.add(menuSettings);
 
         return menuBar;
     }
-
     private void showPanel(JPanel panel) {
         contentPanel.removeAll();
         contentPanel.add(panel);
