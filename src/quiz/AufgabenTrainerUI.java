@@ -67,7 +67,10 @@ public class AufgabenTrainerUI extends JFrame {
         subItem1.addActionListener(e -> JOptionPane.showMessageDialog(this, "Unteroption 1 ausgewählt."));
         subItem2.addActionListener(e -> JOptionPane.showMessageDialog(this, "Unteroption 2 ausgewählt."));
         subItem3.addActionListener(e -> JOptionPane.showMessageDialog(this, "Unteroption 3 ausgewählt."));
-        subItem4.addActionListener(e -> JOptionPane.showMessageDialog(this, "Unteroption 4 ausgewählt."));
+        subItem4.addActionListener(e -> {
+            JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
+            javaFrageAnzeigeUI.setVisible(true);
+        });
 
         itemOption2.add(subItem1);
         itemOption2.add(subItem2);
