@@ -30,12 +30,12 @@ public class JavaCheckerUI extends JPanel {
         label1.setText(currentQuestion); // Display question text in textArea1
     }
 
-	private void buttonCheckeAufgabe(ActionEvent e) {
+    private void buttonCheckeAufgabe(ActionEvent e) {
         try {
-            String sourceCode = "";
-			// Call the pruefeAntwortExeption method and display the output in resultArea
-            String output = javaChecker.pruefeAntwortExeption(sourceCode);
-            textArea2.setText(output); // Set the output with line breaks
+            String sourceCode = textArea1.getText(); // Holen des Quellcodes aus dem Eingabefeld
+            // Übergibt `currentQuestion` und `currentAnswer` an die Methode pruefeAntwortExeption
+            String output = javaChecker.pruefeAntwortExeption(sourceCode, currentQuestion, currentAnswer);
+            textArea2.setText(output); // Zeigt die Ausgabe
         } catch (Exception ex) {
             textArea2.setText("❌ Fehler bei der Verarbeitung.");
             ex.printStackTrace();

@@ -69,13 +69,13 @@ public class JavaChecker implements Aufgabe {
     @Override
     public void pruefeAntwort(String antwort) {
         try {
-            pruefeAntwortExeption(antwort);
+            pruefeAntwortExeption(antwort, antwort, antwort);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public String pruefeAntwortExeption(String sourceCode) throws IOException, InterruptedException {
+    public String pruefeAntwortExeption(String sourceCode, String currentQuestion, String currentAnswer) throws IOException, InterruptedException {
         String className = "HelloWorld";
         Path sourceFile = Paths.get(className + ".java");
         Files.writeString(sourceFile, sourceCode);
