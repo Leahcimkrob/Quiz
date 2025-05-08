@@ -20,7 +20,7 @@ public class AufgabenTrainerUI extends JFrame {
         add(contentPanel); // Füge contentPanel zum JFrame hinzu
 
         panelStart = new JPanel();
-        panelStart.add(new JLabel("tbd"));
+        panelStart.add(new JLabel("Aufgaben Trainer"));
 
         panelFragen = new JPanel();
         panelFragen.add(new JLabel("Startseite"));
@@ -50,19 +50,16 @@ public class AufgabenTrainerUI extends JFrame {
         navigationMenu.add(itemFragen);
         navigationMenu.add(itemEinstellungen);
 
-        // Zweites Menü: Optionen
-        JMenu optionsMenu = new JMenu("Bearbeiten");
-        JMenuItem option1 = new JMenuItem("Option 1");
-        JMenuItem option2 = new JMenuItem("Code erstellen");
+        // Menü: JavaFrageAndern
+        JMenu FrageBearbeiten = new JMenu("Bearbeiten");
+        JMenuItem FrageMultipleChoice = new JMenuItem("MC Fragen");
+        JMenuItem FrageJavacode = new JMenuItem("Java Fragen");
 
-        option1.addActionListener(e -> JOptionPane.showMessageDialog(this, "Option 1 ausgewählt."));
-        option2.addActionListener(e -> JOptionPane.showMessageDialog(this, "Option 2 ausgewählt."));
-
-        optionsMenu.add(option1);
-        optionsMenu.add(option2);
+        FrageBearbeiten.addActionListener(e -> showPanel(new JavaFrageAnzeigeUI())); // Zeige JavaFrageAnzeigeUI im Hauptpanel
+        FrageJavacode.add(FrageJavacode);
 
         menuBar.add(navigationMenu);
-        menuBar.add(optionsMenu);
+        menuBar.add(FrageMultipleChoice);
 
         return menuBar;
     }
