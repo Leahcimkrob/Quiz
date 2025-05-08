@@ -10,5 +10,11 @@
             "Frage": "Schreiben Sie ein Programm, das das Ergebnis von '15+12' ausgibt.",
             "Antwort": "27"
         }
-    }
+    },
+	{
+	    "3": {
+	        "Frage": "Schreiben Sie ein Programm, das das Ergebnis von '15+12' mit Angabe der AUfgabe in 2 Zeilen ausgibt.",
+	        "Antwort": "15+12=27"
+	    }
+	}	
 ]

@@ -167,7 +167,7 @@ public class JavaChecker implements Aufgabe {
             if (programOutput.toString().trim().equals(currentAnswer)) {
                 output.append("\n✅ Aufgabe erfüllt: ").append(currentAnswer).append(" korrekt ausgegeben!");
             } else {
-                output.append("\n❌ Aufgabe nicht korrekt gelöst.");
+                output.append("\n❌ Aufgabe nicht korrekt gelöst.\n");
             }
         }
 
