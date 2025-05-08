@@ -122,4 +122,52 @@ public class JavaChecker implements Aufgabe {
         System.out.println(output.toString());
         return output.toString();
     }
+    
+    public String pruefeAntwortExeption(String sourceCode) throws IOException, InterruptedException {
+        String className = "HelloWorld";
+        Path sourceFile = Paths.get(className + ".java");
+        Files.writeString(sourceFile, sourceCode);
+
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        ByteArrayOutputStream errStream = new ByteArrayOutputStream();
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        int compileResult = compiler.run(null, outStream, errStream, "--release", "17", sourceFile.toString());
+
+        StringBuilder output = new StringBuilder();
+
+        if (compileResult != 0) {
+            output.append("Kompilierungsfehler:\n");
+            output.append(errStream.toString());
+        } else {
+            output.append("Kompilierung erfolgreich. Starte Programm...\n");
+
+            ProcessBuilder processBuilder = new ProcessBuilder("java", className);
+            processBuilder.redirectErrorStream(true);
+            Process process = processBuilder.start();
+
+            StringBuilder programOutput = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    programOutput.append(line).append(System.lineSeparator());
+                }
+            }
+
+            int exitCode = process.waitFor();
+            output.append("Ausgabe des Programms:\n");
+            output.append(programOutput.toString());
+
+            if (programOutput.toString().trim().equals(antwort)) {
+                output.append("\n✅ Aufgabe erfüllt: ").append(antwort).append(" korrekt ausgegeben!");
+            } else {
+                output.append("\n❌ Aufgabe nicht korrekt gelöst.");
+            }
+        }
+
+        Files.deleteIfExists(sourceFile);
+        Files.deleteIfExists(Paths.get(className + ".class"));
+
+        System.out.println(output.toString());
+        return output.toString();
+    }
 }
