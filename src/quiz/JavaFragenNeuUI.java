@@ -19,7 +19,7 @@ public class JavaFragenNeuUI extends JPanel {
         initComponents();
     }
 
-    private void addNewQuestion() {
+     private void addNewQuestion(ActionEvent e) {
         String frage = textField1.getText();
         String antwort = textField2.getText();
 
@@ -30,15 +30,41 @@ public class JavaFragenNeuUI extends JPanel {
 
         fragenManager.addFrage(frage, antwort);
 
-        JOptionPane.showMessageDialog(this, "Frage erfolgreich hinzugefügt.", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(this, 
+            "Frage erfolgreich hinzugefügt.\nMöchten Sie zur Fragenübersicht zurückkehren?", 
+            "Erfolg", 
+            JOptionPane.OK_CANCEL_OPTION, 
+            JOptionPane.INFORMATION_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            switchToJavaFrageAnzeigeUI();
+        }
 
         textField1.setText("");
         textField2.setText("");
     }
+		
+     private void switchToJavaFrageAnzeigeUI() {
+         // Hole das Hauptfenster (JFrame) des aktuellen Panels
+         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 
-	private void addNewQuestion(ActionEvent e) {
-		// TODO add your code here
-	}
+         if (topFrame != null) {
+             // Entferne alle bestehenden Inhalte des Fensters
+             topFrame.getContentPane().removeAll();
+
+             // Erstelle ein neues JavaFrageAnzeigeUI-Panel
+             JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
+
+             // Füge das neue Panel zum Fenster hinzu
+             topFrame.getContentPane().add(javaFrageAnzeigeUI);
+
+             // Aktualisiere und rendere das Fenster neu
+             topFrame.revalidate();
+             topFrame.repaint();
+         } else {
+             System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
+         }
+     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -92,7 +118,6 @@ public class JavaFragenNeuUI extends JPanel {
 		//---- button1 ----
 		button1.setText("Frage hinzuf\u00fcgen");
 		button1.addActionListener(e -> {
-			addNewQuestion(e);
 			addNewQuestion(e);
 		});
 		add(button1, "cell 0 4 2 1,alignx center,growx 0");

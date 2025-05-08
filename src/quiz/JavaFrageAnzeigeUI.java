@@ -48,28 +48,11 @@ public class JavaFrageAnzeigeUI extends JPanel {
     }
 
     public void addNeueFragen() {
-        // Hole das Hauptfenster (JFrame) des aktuellen Panels
-        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-
-        if (topFrame != null) {
-            // Entferne alle bestehenden Inhalte des Fensters
-            topFrame.getContentPane().removeAll();
-
-            // Erstelle ein neues JavaFragenNeuUI-Panel
-            JavaFragenNeuUI javaFragenNeuUI = new JavaFragenNeuUI();
-
-            // Füge das neue Panel zum Fenster hinzu
-            topFrame.getContentPane().add(javaFragenNeuUI);
-
-            // Aktualisiere und render das Fenster neu
-            topFrame.revalidate();
-            topFrame.repaint();
-        } else {
-            System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
-        }
+        // Wechsel zum Panel für neue Fragen
+        switchPanel(new JavaFragenNeuUI());
     }
     
-        private void deleteMarkedQuestions() {
+    private void deleteMarkedQuestions() {
         // Iteriere über die CheckBox-Liste und lösche die markierten Fragen
         for (JCheckBox checkBox : checkBoxList) {
             if (checkBox.isSelected()) {
@@ -78,16 +61,34 @@ public class JavaFrageAnzeigeUI extends JPanel {
             }
         }
 
-        // GUI neu laden, um Änderungen anzuzeigen
-        removeAll();
-        initComponents();
-        initAufgabe();
+        // Wechsel zu aktualisierter Fragenübersicht
+        switchPanel(new JavaFrageAnzeigeUI());
 
         // Aktualisierte Daten in JSON speichern
         try {
             fragenManager.writeJsonArray(fragenManager.readJsonArray());
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+
+    private void switchPanel(JPanel newPanel) {
+        // Hole das Hauptfenster (JFrame) des aktuellen Panels
+        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+        if (topFrame != null) {
+            // Entferne nur den zentralen Inhaltsbereich (ohne Menü)
+            topFrame.getContentPane().removeAll();
+
+            // Füge das neue Panel hinzu
+            topFrame.getContentPane().add(newPanel);
+
+            // Aktualisiere und rendere das Fenster neu
+            topFrame.revalidate();
+            topFrame.repaint();
+        } else {
+            System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
         }
     }
 
