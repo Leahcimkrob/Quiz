@@ -1,22 +1,23 @@
 package quiz;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 import java.io.*;
 import java.nio.file.*;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class JavaChecker implements Aufgabe {
     String frageText = "";
     String antwort = "";
+    Integer[] aufgabenNummern; // Array mit allen Aufgaben-Nummern
+    int currentTaskNumber; // Nummer der aktuellen Aufgabe
 
-	@Override
-	public void initialisiereNummer() {
+    @Override
+    public void initialisiereNummer() {
         try {
             // Parse the JSON file
             Gson gson = new Gson();
@@ -24,23 +25,22 @@ public class JavaChecker implements Aufgabe {
             JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
 
             // Extract all numbers
-            Integer[] numbers = new Integer[jsonArray.size()];
+            aufgabenNummern = new Integer[jsonArray.size()];
             for (int i = 0; i < jsonArray.size(); i++) {
                 JsonObject task = jsonArray.get(i).getAsJsonObject();
                 String key = task.keySet().iterator().next(); // Get the first key
-                numbers[i] = Integer.parseInt(key); // Convert key to integer
+                aufgabenNummern[i] = Integer.parseInt(key); // Convert key to integer
             }
 
-            // Print the numbers (or use them as needed)
-            System.out.println("Extracted numbers: " + Arrays.toString(numbers));
+            // Debug-Ausgabe
+            System.out.println("Nummern erfolgreich initialisiert: " + java.util.Arrays.toString(aufgabenNummern));
         } catch (Exception e) {
             e.printStackTrace();
+            aufgabenNummern = null; // Array auf null setzen, falls ein Fehler auftritt
         }
-		
-	}    
-    
-    
-	@Override
+    }
+
+    @Override
     public void initialiereFrage() {
         try {
             // JSON-Datei einlesen
@@ -53,9 +53,10 @@ public class JavaChecker implements Aufgabe {
                 JsonObject firstTask = jsonArray.get(0).getAsJsonObject();
                 for (String key : firstTask.keySet()) {
                     JsonObject taskDetails = firstTask.getAsJsonObject(key);
+                    currentTaskNumber = Integer.parseInt(key); // Setze die aktuelle Aufgaben-Nummer
                     frageText = taskDetails.get("Frage").getAsString(); // Frage
                     antwort = taskDetails.get("Antwort").getAsString(); // Erwartete Antwort
-                    break; // Nur die erste Frage lesen
+                    break; // Nur die erste Aufgabe lesen
                 }
             }
             reader.close();
@@ -101,6 +102,7 @@ public class JavaChecker implements Aufgabe {
         }
     }
 
+    // Add the missing pruefeAntwortExeption(String, String, String) method
     public String pruefeAntwortExeption(String sourceCode, String currentQuestion, String currentAnswer) throws IOException, InterruptedException {
         String className = "HelloWorld";
         Path sourceFile = Paths.get(className + ".java");
@@ -135,8 +137,8 @@ public class JavaChecker implements Aufgabe {
             output.append("Ausgabe des Programms:\n");
             output.append(programOutput.toString());
 
-            if (programOutput.toString().trim().equals(antwort)) {
-                output.append("\n✅ Aufgabe erfüllt: ").append(antwort).append(" korrekt ausgegeben!");
+            if (programOutput.toString().trim().equals(currentAnswer)) {
+                output.append("\n✅ Aufgabe erfüllt: ").append(currentAnswer).append(" korrekt ausgegeben!");
             } else {
                 output.append("\n❌ Aufgabe nicht korrekt gelöst.");
             }
@@ -145,57 +147,6 @@ public class JavaChecker implements Aufgabe {
         Files.deleteIfExists(sourceFile);
         Files.deleteIfExists(Paths.get(className + ".class"));
 
-        System.out.println(output.toString());
         return output.toString();
     }
-    
-    public String pruefeAntwortExeption(String sourceCode) throws IOException, InterruptedException {
-        String className = "HelloWorld";
-        Path sourceFile = Paths.get(className + ".java");
-        Files.writeString(sourceFile, sourceCode);
-
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-        ByteArrayOutputStream errStream = new ByteArrayOutputStream();
-        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        int compileResult = compiler.run(null, outStream, errStream, "--release", "17", sourceFile.toString());
-
-        StringBuilder output = new StringBuilder();
-
-        if (compileResult != 0) {
-            output.append("Kompilierungsfehler:\n");
-            output.append(errStream.toString());
-        } else {
-            output.append("Kompilierung erfolgreich. Starte Programm...\n");
-
-            ProcessBuilder processBuilder = new ProcessBuilder("java", className);
-            processBuilder.redirectErrorStream(true);
-            Process process = processBuilder.start();
-
-            StringBuilder programOutput = new StringBuilder();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    programOutput.append(line).append(System.lineSeparator());
-                }
-            }
-
-            int exitCode = process.waitFor();
-            output.append("Ausgabe des Programms:\n");
-            output.append(programOutput.toString());
-
-            if (programOutput.toString().trim().equals(antwort)) {
-                output.append("\n✅ Aufgabe erfüllt: ").append(antwort).append(" korrekt ausgegeben!");
-            } else {
-                output.append("\n❌ Aufgabe nicht korrekt gelöst.");
-            }
-        }
-
-        Files.deleteIfExists(sourceFile);
-        Files.deleteIfExists(Paths.get(className + ".class"));
-
-        System.out.println(output.toString());
-        return output.toString();
-    }
-
-
 }
