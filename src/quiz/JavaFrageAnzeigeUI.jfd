@@ -1,41 +1,29 @@
-JFDML JFormDesigner: "8.2.3.0.386" Java: "21.0.6" encoding: "UTF-8"
+JFDML JFormDesigner: "8.2.3.0.386" Java: "21.0.7" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3"
-			"$columnConstraints": "[41,fill][194,fill][230,fill]"
-			"$rowConstraints": "[][][]"
+			"$columnConstraints": "[13,fill][100:41:41,fill][194:258,grow,fill][100:230:100,grow,fill][fill][fill]"
+			"$rowConstraints": "[][][][][][][][]"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "Titel"
+				"text": "Fragenübersicht"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 0 3 1,alignx center,growx 0"
+				"value": "cell 0 0 4 1,alignx center,growx 0"
 			} )
-			add( new FormComponent( "javax.swing.JCheckBox" ) {
-				name: "checkBox1"
-				"text": "Nummer"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "Markierte Löschen"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 1"
-			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField1"
-				"text": "Frage"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 1 1"
-			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField2"
-				"text": "Antwort"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 2 1"
+				"value": "cell 0 7 6 1,alignx center,growx 0"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 430, 300 )
 		} )
 	}
 }
