@@ -137,6 +137,25 @@ public class JavaFragenManager implements Aufgabe {
         writer.close();
     }
 
+ // Methode zum Abrufen aller Nummern, Fragen und Antworten
+    public void getAlleFragenUndAntworten() {
+        try {
+            JsonArray jsonArray = readJsonArray();
+            System.out.println("Alle Aufgaben:");
+            for (JsonElement element : jsonArray) {
+                JsonObject task = element.getAsJsonObject();
+                for (String key : task.keySet()) {
+                    JsonObject taskDetails = task.getAsJsonObject(key);
+                    String frage = taskDetails.get("Frage").getAsString();
+                    String antwort = taskDetails.get("Antwort").getAsString();
+                    System.out.printf("Nummer: %s, Frage: %s, Antwort: %s%n", key, frage, antwort);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }    
+    
     @Override
     public void initialisiereNummer() {
         // Diese Methode ist für die Schnittstelle erforderlich, wird hier jedoch nicht genutzt.
