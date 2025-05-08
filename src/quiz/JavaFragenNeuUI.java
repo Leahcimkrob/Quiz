@@ -13,13 +13,11 @@ import net.miginfocom.swing.*;
  */
 public class JavaFragenNeuUI extends JPanel {
     private JavaFragenManager fragenManager;
-    
 
     public JavaFragenNeuUI() {
         fragenManager = new JavaFragenManager();
         initComponents();
     }
-	
 
     private void addNewQuestion() {
         String frage = textField1.getText();
@@ -42,8 +40,8 @@ public class JavaFragenNeuUI extends JPanel {
 		// TODO add your code here
 	}
 
-	private void initComponents() {
-		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
+    private void initComponents() {
+        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
 		// Generated using JFormDesigner Evaluation license - Michael Bork
 		label1 = new JLabel();
 		label4 = new JLabel();
@@ -54,12 +52,12 @@ public class JavaFragenNeuUI extends JPanel {
 		button1 = new JButton();
 
 		//======== this ========
-		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-		( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-		. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,12 ), java. awt
-		. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-		propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .getPropertyName () )) throw new RuntimeException( )
-		; }} );
+		setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .
+		EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax . swing
+		. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,
+		java . awt. Color .red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( )
+		{ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )
+		throw new RuntimeException( ) ;} } );
 		setLayout(new MigLayout(
 			"hidemode 3",
 			// columns
@@ -94,10 +92,10 @@ public class JavaFragenNeuUI extends JPanel {
 		button1.setText("Frage hinzuf\u00fcgen");
 		button1.addActionListener(e -> addNewQuestion(e));
 		add(button1, "cell 0 4 2 1,alignx center,growx 0");
-		// JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
-	}
+        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
+    }
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
 	// Generated using JFormDesigner Evaluation license - Michael Bork
 	private JLabel label1;
 	private JLabel label4;
@@ -106,5 +104,5 @@ public class JavaFragenNeuUI extends JPanel {
 	private JLabel label3;
 	private JTextField textField2;
 	private JButton button1;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
+    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
