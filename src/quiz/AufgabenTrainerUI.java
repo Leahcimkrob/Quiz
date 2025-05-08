@@ -56,10 +56,16 @@ public class AufgabenTrainerUI extends JFrame {
         // Zweites Menü: Einstellungen
         JMenu menuSettings = new JMenu("Einstellungen");
         JMenuItem itemOption1 = new JMenuItem("Option 1");
-        JMenuItem itemOption2 = new JMenuItem("Option 2");
+        JMenu itemOption2 = new JMenu("Java-Aufgaben"); // Convert Option 2 to a JMenu for a submenu
 
-        itemOption1.addActionListener(e -> JOptionPane.showMessageDialog(this, "Option 1 ausgewählt."));
-        itemOption2.addActionListener(e -> JOptionPane.showMessageDialog(this, "Option 2 ausgewählt."));
+        // Add submenu items to Option 2
+        JMenuItem subItem1 = new JMenuItem("Unteroption 1");
+        JMenuItem subItem2 = new JMenuItem("Unteroption 2");
+        subItem1.addActionListener(e -> JOptionPane.showMessageDialog(this, "Unteroption 1 ausgewählt."));
+        subItem2.addActionListener(e -> JOptionPane.showMessageDialog(this, "Unteroption 2 ausgewählt."));
+
+        itemOption2.add(subItem1);
+        itemOption2.add(subItem2);
 
         menuSettings.add(itemOption1);
         menuSettings.add(itemOption2);
