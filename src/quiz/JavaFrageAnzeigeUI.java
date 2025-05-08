@@ -47,6 +47,28 @@ public class JavaFrageAnzeigeUI extends JPanel {
         repaint();
     }
 
+    public void addNeueFragen() {
+        // Hole das Hauptfenster (JFrame) des aktuellen Panels
+        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+        if (topFrame != null) {
+            // Entferne alle bestehenden Inhalte des Fensters
+            topFrame.getContentPane().removeAll();
+
+            // Erstelle ein neues JavaFragenNeuUI-Panel
+            JavaFragenNeuUI javaFragenNeuUI = new JavaFragenNeuUI();
+
+            // Füge das neue Panel zum Fenster hinzu
+            topFrame.getContentPane().add(javaFragenNeuUI);
+
+            // Aktualisiere und render das Fenster neu
+            topFrame.revalidate();
+            topFrame.repaint();
+        } else {
+            System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
+        }
+    }
+    
         private void deleteMarkedQuestions() {
         // Iteriere über die CheckBox-Liste und lösche die markierten Fragen
         for (JCheckBox checkBox : checkBoxList) {
@@ -116,14 +138,8 @@ public class JavaFrageAnzeigeUI extends JPanel {
             }            
         });
         
-     // Adding functionality for button3
-        button3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	  SwingUtilities.invokeLater(AufgabenTrainerUI::new);
-            }
-        });        
-        
+        // ActionListener für Button3
+        button3.addActionListener(e -> addNeueFragen());
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY
