@@ -8,9 +8,9 @@ import com.google.gson.JsonObject;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class JavaFragenManager implements Aufgabe {
     private final String jsonFilePath = "javaaufgabe.json";
@@ -33,23 +33,6 @@ public class JavaFragenManager implements Aufgabe {
             jsonArray.add(newTask);
             writeJsonArray(jsonArray);
             System.out.println("Frage erfolgreich hinzugefügt: Nummer " + neueNummer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Methode zum Abrufen aller bestehenden Nummern
-    public void getNummern() {
-        try {
-            JsonArray jsonArray = readJsonArray();
-            System.out.println("Vorhandene Aufgaben-Nummern:");
-            for (JsonElement element : jsonArray) {
-                JsonObject task = element.getAsJsonObject();
-                Set<String> keys = task.keySet();
-                for (String key : keys) {
-                    System.out.println(key);
-                }
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,13 +64,14 @@ public class JavaFragenManager implements Aufgabe {
         }
     }
 
-    // Methode zum Löschen einer Frage
+ // Methode zum Löschen einer Frage mit Neunummerierung
     public void deleteFrage(int nummer) {
         try {
             JsonArray jsonArray = readJsonArray();
             JsonArray updatedArray = new JsonArray();
             boolean deleted = false;
 
+            // Lösche die Frage mit der angegebenen Nummer
             for (JsonElement element : jsonArray) {
                 JsonObject task = element.getAsJsonObject();
                 if (!task.has(String.valueOf(nummer))) {
@@ -98,8 +82,10 @@ public class JavaFragenManager implements Aufgabe {
             }
 
             if (deleted) {
-                writeJsonArray(updatedArray);
-                System.out.println("Frage erfolgreich gelöscht: Nummer " + nummer);
+                // Neunummerierung der verbleibenden Fragen
+                JsonArray reindexedArray = reindexQuestions(updatedArray);
+                writeJsonArray(reindexedArray);
+                System.out.println("Frage erfolgreich gelöscht und Nummern neu zugewiesen.");
             } else {
                 System.out.println("Aufgabe mit der Nummer " + nummer + " nicht gefunden.");
             }
@@ -108,6 +94,25 @@ public class JavaFragenManager implements Aufgabe {
         }
     }
 
+    // Hilfsmethode zur Neunummerierung der Fragen
+    private JsonArray reindexQuestions(JsonArray jsonArray) {
+        JsonArray reindexedArray = new JsonArray();
+        int newNumber = 1;
+
+        for (JsonElement element : jsonArray) {
+            JsonObject oldTask = element.getAsJsonObject();
+            String oldKey = oldTask.keySet().iterator().next(); // Hole den alten Schlüssel
+            JsonObject taskDetails = oldTask.getAsJsonObject(oldKey);
+
+            // Erstelle einen neuen Task mit aktualisierter Nummer
+            JsonObject newTask = new JsonObject();
+            newTask.add(String.valueOf(newNumber), taskDetails);
+            reindexedArray.add(newTask);
+            newNumber++;
+        }
+
+        return reindexedArray;
+    }
     // Methode zum Ermitteln der nächsten freien Nummer
     private int getNextNummer(JsonArray jsonArray) {
         int maxNummer = 0;
@@ -124,7 +129,7 @@ public class JavaFragenManager implements Aufgabe {
     }
 
     // Hilfsmethode zum Lesen des JSON-Arrays
-    private JsonArray readJsonArray() throws IOException {
+    JsonArray readJsonArray() throws IOException {
         FileReader reader = new FileReader(jsonFilePath);
         JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
         reader.close();
@@ -132,9 +137,13 @@ public class JavaFragenManager implements Aufgabe {
     }
 
     // Hilfsmethode zum Schreiben des JSON-Arrays in die Datei
-    private void writeJsonArray(JsonArray jsonArray) throws IOException {
+    void writeJsonArray(JsonArray jsonArray) throws IOException {
         FileWriter writer = new FileWriter(jsonFilePath);
-        gson.toJson(jsonArray, writer);
+
+        // Formatierung sicherstellen
+        Gson prettyGson = new Gson().newBuilder().setPrettyPrinting().create();
+        prettyGson.toJson(jsonArray, writer);
+
         writer.flush();
         writer.close();
     }
@@ -157,8 +166,8 @@ public class JavaFragenManager implements Aufgabe {
             e.printStackTrace();
         }
         return fragenListe;
-    } 
-    
+    }
+
     @Override
     public void initialisiereNummer() {
         // Diese Methode ist für die Schnittstelle erforderlich, wird hier jedoch nicht genutzt.

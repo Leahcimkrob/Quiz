@@ -1,20 +1,20 @@
 [
-    {
-        "1": {
-            "Frage": "Schreiben Sie ein Programm, das 'Hello World' ausgibt.",
-            "Antwort": "Hello World"
-        }
-    },
-    {
-        "2": {
-            "Frage": "Schreiben Sie ein Programm, das das Ergebnis von '15+12' ausgibt.",
-            "Antwort": "27"
-        }
-    },
-	{
-	    "3": {
-	        "Frage": "Schreiben Sie ein Programm, das das Ergebnis von '15+12' mit Angabe der AUfgabe in 2 Zeilen ausgibt.",
-	        "Antwort": "15+12=27"
-	    }
-	}	
+  {
+    "1": {
+      "Frage": "Schreiben Sie ein Programm, das \u0027Hello World\u0027 ausgibt.",
+      "Antwort": "Hello World"
+    }
+  },
+  {
+    "2": {
+      "Frage": "Schreiben Sie ein Programm, das das Ergebnis von \u002715+12\u0027 mit Angabe der AUfgabe in 2 Zeilen ausgibt.",
+      "Antwort": "15+12\u003d27"
+    }
+  },
+  {
+    "3": {
+      "Frage": "Schreiben Sie ein Programm, das das Ergebnis von \u002715+12\u0027 ausgibt.",
+      "Antwort": "27"
+    }
+  }
 ]

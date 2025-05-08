@@ -24,7 +24,7 @@ public class JavaCheckerUI extends JPanel {
     private void initAufgabe() {
         // Nullprüfung für aufgabenNummern hinzufügen
         if (javaChecker.aufgabenNummern == null || javaChecker.aufgabenNummern.length == 0) {
-            System.out.println("Keine Aufgaben-Nummern verfügbar oder Array ist null.");
+            label1.setText("Keine Aufgaben verfügbar."); // Fallback-Anzeige
             return;
         }
 
@@ -61,8 +61,6 @@ public class JavaCheckerUI extends JPanel {
         for (Integer nummer : aufgabenNummern) {
             System.out.println(nummer);
         }
-
-        // Alternativ: Die Nummern könnten in der UI angezeigt werden, falls benötigt.
     }
 
     private void buttonCheckeAufgabe(ActionEvent e) {
@@ -72,7 +70,7 @@ public class JavaCheckerUI extends JPanel {
             String output = javaChecker.pruefeAntwortExeption(sourceCode, currentQuestion, currentAnswer);
             textArea2.setText(output); // Zeigt die Ausgabe
         } catch (Exception ex) {
-            textArea2.setText("❌ Fehler bei der Verarbeitung.");
+            textArea2.setText("❌ Fehler bei der Verarbeitung: " + ex.getMessage());
             ex.printStackTrace();
         }
     }
@@ -105,7 +103,9 @@ public class JavaCheckerUI extends JPanel {
         addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             @Override
             public void propertyChange(java.beans.PropertyChangeEvent e) {
-                if ("\u0062order".equals(e.getPropertyName())) throw new RuntimeException();
+                if ("border".equals(e.getPropertyName())) {
+                    System.out.println("Border-Eigenschaft geändert."); // Debugging statt RuntimeException
+                }
             }
         });
         setLayout(new MigLayout(

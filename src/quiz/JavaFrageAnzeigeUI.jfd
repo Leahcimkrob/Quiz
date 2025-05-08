@@ -15,12 +15,6 @@ new FormModel {
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 0 0 4 1,alignx center,growx 0"
 			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button2"
-				"text": "Markierte Löschen"
-			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 7 6 1,alignx center,growx 0"
-			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
 			"size": new java.awt.Dimension( 430, 300 )
