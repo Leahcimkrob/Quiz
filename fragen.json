@@ -1,26 +1,19 @@
 [
-  {
-    "questionText": "Wie heisst die ehemalige Hauptstadt von Deutschland?",
-    "optionA": "Berlin",
-    "optionB": "Düsseldorf",
-    "optionC": "Bonn",
-    "optionD": "Hamburg",
-    "correctOption": "c"
-  },
-  {
-    "questionText": "Was sind 2+2*2",
-    "optionA": "8",
-    "optionB": "16",
-    "optionC": "4",
-    "optionD": "6",
-    "correctOption": "d"
-  },
-  {
-    "questionText": "Mit welcher Methode kann was auf dem Bildschirm ausgegeben werden?",
-    "optionA": "System.out.println",
-    "optionB": "system.out.printLN",
-    "optionC": "sys.Out.print",
-    "optionD": "print",
-    "correctOption": "a"
-  }
+	{
+	  "1": {
+	    "Frage": "Wie heisst die ehemalige Hauptstadt von Deutschland?",
+	    "Antworten": "Berlin, Düsseldorf, Bonn, Hamburg",
+	    "Loesung": "Bonn"
+	  },
+	  "2": {
+	    "Frage": "Was sind 2+2*2",
+	    "Antworten": "8, 16, 4, 6",
+	    "Loesung": "6"
+	  },
+	  "3": {
+	    "Frage": "Mit welcher Methode kann was auf dem Bildschirm ausgegeben werden?",
+	    "Antworten": "System.out.println, system.out.printLN, sys.Out.print, print",
+	    "Loesung": "System.out.println"
+	  }
+	}
 ]

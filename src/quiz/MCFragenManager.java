@@ -12,87 +12,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class JavaFragenManager implements Aufgabe {
-    private final String jsonFilePath = "javaaufgabe.json";
+public class MCFragenManager implements Aufgabe {
+    private final String jsonFilePath = "mcaufgabe.json";
     private Gson gson;
 
-    public JavaFragenManager() {
+    public MCFragenManager() {
         gson = new Gson();
+    }
+    
+    public void viewFrage(String frage, String antwort, String loesung) {
+
     }
 
     // Methode zum Hinzufügen einer neuen Frage und Antwort mit automatischer Nummer
     public void addFrage(String frage, String antwort, String loesung) {
-        try {
-            JsonArray jsonArray = readJsonArray();
-            int neueNummer = getNextNummer(jsonArray); // Automatische Nummer berechnen
-            JsonObject newTask = new JsonObject();
-            JsonObject taskDetails = new JsonObject();
-            taskDetails.addProperty("Frage", frage);
-            taskDetails.addProperty("Antwort", antwort);
-            taskDetails.addProperty("Loesung", loesung);
-            newTask.add(String.valueOf(neueNummer), taskDetails);
-            jsonArray.add(newTask);
-            writeJsonArray(jsonArray);
-            System.out.println("Frage erfolgreich hinzugefügt: Nummer " + neueNummer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     // Methode zum Korrigieren von Fragen und Antworten
-    public void updateFrage(int nummer, String neueFrage, String neueAntwort, String neueLoesung) {
-        try {
-            JsonArray jsonArray = readJsonArray();
-            boolean updated = false;
-            for (JsonElement element : jsonArray) {
-                JsonObject task = element.getAsJsonObject();
-                if (task.has(String.valueOf(nummer))) {
-                    JsonObject taskDetails = task.getAsJsonObject(String.valueOf(nummer));
-                    taskDetails.addProperty("Frage", neueFrage);
-                    taskDetails.addProperty("Antwort", neueAntwort);
-                    taskDetails.addProperty("Loesung", neueLoesung);
-                    updated = true;
-                    break;
-                }
-            }
-            if (updated) {
-                writeJsonArray(jsonArray);
-                System.out.println("Frage erfolgreich aktualisiert: Nummer " + nummer);
-            } else {
-                System.out.println("Aufgabe mit der Nummer " + nummer + " nicht gefunden.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void updateFrage(int nummer, String neueFrage, String neueAntwort, String loesung) {
+
     }
 
- // Methode zum Löschen einer Frage 
+ // Methode zum Löschen einer Frage mit Neunummerierung
     public void deleteFrage(int nummer) {
-        try {
-            JsonArray jsonArray = readJsonArray();
-            JsonArray updatedArray = new JsonArray();
-            boolean deleted = false;
 
-            // Lösche die Frage mit der angegebenen Nummer
-            for (JsonElement element : jsonArray) {
-                JsonObject task = element.getAsJsonObject();
-                if (!task.has(String.valueOf(nummer))) {
-                    updatedArray.add(task);
-                } else {
-                    deleted = true;
-                }
-            }
-
-            if (deleted) {
-                // Schreibe das aktualisierte Array in die Datei
-                writeJsonArray(updatedArray);
-                System.out.println("Frage " + nummer + " erfolgreich gelöscht und Nummern neu zugewiesen.");
-            } else {
-                System.out.println("Aufgabe mit der Nummer " + nummer + " nicht gefunden.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -118,11 +62,9 @@ public class JavaFragenManager implements Aufgabe {
         reader.close();
         return jsonArray != null ? jsonArray : new JsonArray(); // Falls die Datei leer ist, ein neues Array zurückgeben
     }
-
     // Hilfsmethode zum Schreiben des JSON-Arrays in die Datei
     void writeJsonArray(JsonArray jsonArray) throws IOException {
         FileWriter writer = new FileWriter(jsonFilePath);
-
         // Formatierung sicherstellen
         Gson prettyGson = new Gson().newBuilder().setPrettyPrinting().create();
         prettyGson.toJson(jsonArray, writer);
@@ -142,8 +84,8 @@ public class JavaFragenManager implements Aufgabe {
                     JsonObject taskDetails = task.getAsJsonObject(key);
                     String frage = taskDetails.get("Frage").getAsString();
                     String antwort = taskDetails.get("Antwort").getAsString();
-                    String loesung = taskDetails.get("Loesung").getAsString();
-                    fragenListe.add(new String[]{key, frage, antwort, loesung});
+                    String loesung = taskDetails.get("loesung").getAsString();
+                    fragenListe.add(new String[]{key, frage, antwort});
                 }
             }
         } catch (IOException e) {
