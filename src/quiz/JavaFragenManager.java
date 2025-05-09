@@ -21,7 +21,7 @@ public class JavaFragenManager implements Aufgabe {
     }
 
     // Methode zum Hinzufügen einer neuen Frage und Antwort mit automatischer Nummer
-    public void addFrage(String frage, String antwort, String loesung) {
+    public void addFrage(String frage, String antwort) {
         try {
             JsonArray jsonArray = readJsonArray();
             int neueNummer = getNextNummer(jsonArray); // Automatische Nummer berechnen
@@ -29,7 +29,6 @@ public class JavaFragenManager implements Aufgabe {
             JsonObject taskDetails = new JsonObject();
             taskDetails.addProperty("Frage", frage);
             taskDetails.addProperty("Antwort", antwort);
-            taskDetails.addProperty("Loesung", loesung);
             newTask.add(String.valueOf(neueNummer), taskDetails);
             jsonArray.add(newTask);
             writeJsonArray(jsonArray);
@@ -40,7 +39,7 @@ public class JavaFragenManager implements Aufgabe {
     }
 
     // Methode zum Korrigieren von Fragen und Antworten
-    public void updateFrage(int nummer, String neueFrage, String neueAntwort, String neueLoesung) {
+    public void updateFrage(int nummer, String neueFrage, String neueAntwort) {
         try {
             JsonArray jsonArray = readJsonArray();
             boolean updated = false;
@@ -50,7 +49,6 @@ public class JavaFragenManager implements Aufgabe {
                     JsonObject taskDetails = task.getAsJsonObject(String.valueOf(nummer));
                     taskDetails.addProperty("Frage", neueFrage);
                     taskDetails.addProperty("Antwort", neueAntwort);
-                    taskDetails.addProperty("Loesung", neueLoesung);
                     updated = true;
                     break;
                 }
@@ -142,8 +140,7 @@ public class JavaFragenManager implements Aufgabe {
                     JsonObject taskDetails = task.getAsJsonObject(key);
                     String frage = taskDetails.get("Frage").getAsString();
                     String antwort = taskDetails.get("Antwort").getAsString();
-                    String loesung = taskDetails.get("Loesung").getAsString();
-                    fragenListe.add(new String[]{key, frage, antwort, loesung});
+                    fragenListe.add(new String[]{key, frage, antwort});
                 }
             }
         } catch (IOException e) {
