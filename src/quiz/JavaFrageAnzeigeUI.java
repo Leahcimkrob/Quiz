@@ -5,16 +5,19 @@ import net.miginfocom.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class JavaFrageAnzeigeUI extends JPanel {
     private JavaFragenManager fragenManager; // Referenz auf den Fragen-Manager
     private List<JCheckBox> checkBoxList; // Liste aller Checkboxes
-
+    private Map<Integer, String> nummerZuFrageMap; // Map zur Verknüpfung von Zeilennummer und ursprünglicher Nummer
 
     public JavaFrageAnzeigeUI() {
         fragenManager = new JavaFragenManager(); // Initialisiere den Fragen-Manager
         checkBoxList = new ArrayList<>();
+        nummerZuFrageMap = new HashMap<>();
         initComponents();
         initAufgabe(); // Dynamische Zeilen basierend auf den Daten erstellen
     }
@@ -26,7 +29,11 @@ public class JavaFrageAnzeigeUI extends JPanel {
         for (String[] frageDetails : fragenListe) {
             // Für jede Nummer, Frage und Antwort eine Zeile erstellen
             JButton button = new JButton("Bearb.");
-            JCheckBox checkBox = new JCheckBox(frageDetails[0]); // Checkbox für die Nummer
+
+            // Checkbox mit durchgehender Nummerierung basierend auf der Zeile
+            JCheckBox checkBox = new JCheckBox(String.valueOf(zeile));
+            nummerZuFrageMap.put(zeile, frageDetails[0]); // Speichere ursprüngliche Nummer mit Zeilennummer
+
             JTextField textFieldFrage = new JTextField(frageDetails[1]); // Textfeld für die Frage
             JTextField textFieldAntwort = new JTextField(frageDetails[2]); // Textfeld für die Antwort
 
@@ -41,14 +48,13 @@ public class JavaFrageAnzeigeUI extends JPanel {
 
             zeile++;
         }
-        //---- button2 ----
-        button2.setText("Markierte Löschen");
-        add(button2, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0"); // Reduced the gap to 10 pixels on the right
 
-        //---- button3 ----
+        // Buttons hinzufügen
+        button2.setText("Markierte Löschen");
+        add(button2, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0");
+
         button3.setText("Neue hinzufügen");
-        add(button3, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0"); // Reduced the gap to 10 pixels on the left
-        // Hinzufügen der Funktionalität für button2
+        add(button3, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0");
 
         // Nach dem Hinzufügen von Komponenten die GUI neu validieren
         revalidate();
@@ -75,15 +81,16 @@ public class JavaFrageAnzeigeUI extends JPanel {
         } else {
             System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
         }
-    }
+    }    
     
     private void deleteMarkedQuestions() {
         // Iteriere über die CheckBox-Liste und lösche die markierten Fragen
         List<JCheckBox> toRemove = new ArrayList<>();
         for (JCheckBox checkBox : checkBoxList) {
             if (checkBox.isSelected()) {
-                int nummer = Integer.parseInt(checkBox.getText()); // Nummer aus der Checkbox
-                fragenManager.deleteFrage(nummer); // Frage löschen
+                int zeilennummer = Integer.parseInt(checkBox.getText()); // Zeilennummer aus Checkbox
+                String originalNummer = nummerZuFrageMap.get(zeilennummer); // Ursprüngliche Nummer abrufen
+                fragenManager.deleteFrage(Integer.parseInt(originalNummer)); // Frage löschen
                 toRemove.add(checkBox); // Checkbox zur Entfernungs-Liste hinzufügen
             }
         }
@@ -119,12 +126,11 @@ public class JavaFrageAnzeigeUI extends JPanel {
         }
     }
 
-
     private void initComponents() {
         label1 = new JLabel();
         button2 = new JButton();
         button3 = new JButton();
-        
+
         //======== this ========
         setBorder(new javax.swing.border.CompoundBorder(
                 new javax.swing.border.TitledBorder("Fragenübersicht"),
@@ -153,7 +159,7 @@ public class JavaFrageAnzeigeUI extends JPanel {
         add(label1, "cell 0 0 4 1,alignx center,growx 0");
 
         button2.addActionListener(e -> deleteMarkedQuestions());
-        
+
         // ActionListener für Button3
         button3.addActionListener(e -> addNeueFragen());
     }
@@ -161,6 +167,6 @@ public class JavaFrageAnzeigeUI extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY
     private JLabel label1;
     private JButton button2;
-    private JButton button3;    
+    private JButton button3;
     // JFormDesigner - End of variables declaration
 }

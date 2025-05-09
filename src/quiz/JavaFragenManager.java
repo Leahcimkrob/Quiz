@@ -82,7 +82,8 @@ public class JavaFragenManager implements Aufgabe {
             }
 
             if (deleted) {
-                // Neunummerierung der verbleibenden Fragen
+                // Schreibe das aktualisierte Array in die Datei
+                writeJsonArray(updatedArray);
                 System.out.println("Frage " + nummer + " erfolgreich gelöscht und Nummern neu zugewiesen.");
             } else {
                 System.out.println("Aufgabe mit der Nummer " + nummer + " nicht gefunden.");
