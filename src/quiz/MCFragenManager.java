@@ -20,36 +20,29 @@ public class MCFragenManager implements Aufgabe {
         gson = new Gson();
     }
     
-    public void viewFrage(int nummer) {
-        try {
-            // JSON-Array aus der Datei lesen
-            JsonArray jsonArray = readJsonArray();
-
-            // Durch die JSON-Objekte iterieren, um die entsprechende Frage zu finden
-            for (JsonElement element : jsonArray) {
-                JsonObject task = element.getAsJsonObject();
-                if (task.has(String.valueOf(nummer))) {
-                    JsonObject frageDetails = task.getAsJsonObject(String.valueOf(nummer));
-
-                    // Frage, Antworten und Lösung ausgeben
-                    String frage = frageDetails.get("Frage").getAsString();
-                    String antworten = frageDetails.get("Antworten").getAsString();
-                    String loesung = frageDetails.get("Loesung").getAsString();
-
-                    System.out.println("Frage: " + frage);
-                    System.out.println("Antworten: " + antworten);
-                    System.out.println("Lösung: " + loesung);
-                    return; // Methode beenden, wenn die Frage gefunden wurde
+    public String[] viewFrage(int nummer) throws IOException {
+        JsonArray jsonArray = readJsonArray();
+        for (JsonElement element : jsonArray) {
+            JsonObject task = element.getAsJsonObject();
+            if (task.has(String.valueOf(nummer))) {
+                JsonObject frageDetails = task.getAsJsonObject(String.valueOf(nummer));
+                
+                String frage = frageDetails.get("Frage").getAsString();
+                String antwortenString = frageDetails.get("Antworten").getAsString();
+                List<String> antworten = List.of(antwortenString.split(","));
+                
+                String[] frageUndAntworten = new String[antworten.size() + 1];
+                frageUndAntworten[0] = frage; // Frage als erstes Element
+                for (int i = 0; i < antworten.size(); i++) {
+                    frageUndAntworten[i + 1] = antworten.get(i); // Antworten folgen
                 }
+                
+                return frageUndAntworten;
             }
-
-            // Wenn die Nummer nicht gefunden wurde
-            System.out.println("Die Frage mit der Nummer " + nummer + " wurde nicht gefunden.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Fehler beim Lesen der JSON-Datei.");
         }
+        throw new IOException("Frage mit der Nummer " + nummer + " wurde nicht gefunden.");
     }
+
 
     // Methode zum Hinzufügen einer neuen Frage und Antwort mit automatischer Nummer
     public void addFrage(String frage, String antwort, String loesung) {

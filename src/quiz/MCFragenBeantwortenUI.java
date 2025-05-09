@@ -4,6 +4,9 @@
 
 package quiz;
 
+import java.awt.event.*;
+import java.io.IOException;
+
 import javax.swing.*;
 import net.miginfocom.swing.*;
 
@@ -11,14 +14,40 @@ import net.miginfocom.swing.*;
  * @author mbor193
  */
 public class MCFragenBeantwortenUI extends JPanel {
+    private MCFragenManager fragenManager;
+	
 	public MCFragenBeantwortenUI() {
 		initComponents();
+		 fragenManager = new MCFragenManager();
 		initFrage();
 	}
 
 	private void initFrage() {
-		// TODO Auto-generated method stub
-		
+	    int frageNummer = 1; // Beispiel: Lade die erste Frage
+	    try {
+	        // Hole Frage und Antworten mit viewFrage
+	        String[] frageUndAntworten = fragenManager.viewFrage(frageNummer);
+	        
+	        label2.setText(frageUndAntworten[0]); // Setze die Frage
+	        radioButton1.setText(frageUndAntworten[1]); // Setze Antwort 1
+	        radioButton2.setText(frageUndAntworten[2]); // Setze Antwort 2
+	        radioButton3.setText(frageUndAntworten[3]); // Setze Antwort 3
+	        radioButton4.setText(frageUndAntworten[4]); // Setze Antwort 4
+	    } catch (IOException e) {
+	        label2.setText("Fehler beim Laden der Frage.");
+	        radioButton1.setText("");
+	        radioButton2.setText("");
+	        radioButton3.setText("");
+	        radioButton4.setText("");
+	    }
+	}
+
+	private void button1(ActionEvent e) {
+		// TODO add your code here
+	}
+
+	private void button2(ActionEvent e) {
+		// TODO add your code here
 	}
 	
 	
@@ -37,11 +66,12 @@ public class MCFragenBeantwortenUI extends JPanel {
 		label3 = new JLabel();
 
 		//======== this ========
-		setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(
-		0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder
-		.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,12),java.awt.Color.
-		red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.
-		beans.PropertyChangeEvent e){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}});
+		setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+		border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER
+		,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font
+		.BOLD,12),java.awt.Color.red), getBorder())); addPropertyChangeListener(
+		new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order"
+		.equals(e.getPropertyName()))throw new RuntimeException();}});
 		setLayout(new MigLayout(
 			"hidemode 3,alignx center",
 			// columns
@@ -82,10 +112,12 @@ public class MCFragenBeantwortenUI extends JPanel {
 
 		//---- button1 ----
 		button1.setText("Antwort Pr\u00fcfen");
+		button1.addActionListener(e -> button1(e));
 		add(button1, "cell 0 6,alignx left,growx 0,width 111::111");
 
 		//---- button2 ----
 		button2.setText("N\u00e4chste Frage");
+		button2.addActionListener(e -> button2(e));
 		add(button2, "cell 0 6,alignx right,growx 0,width 111:111");
 
 		//---- label3 ----
