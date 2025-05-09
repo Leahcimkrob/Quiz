@@ -20,28 +20,31 @@ public class MCFragenManager implements Aufgabe {
         gson = new Gson();
     }
     
-    public String[] viewFrage(int nummer) throws IOException {
-        JsonArray jsonArray = readJsonArray();
-        for (JsonElement element : jsonArray) {
-            JsonObject task = element.getAsJsonObject();
-            if (task.has(String.valueOf(nummer))) {
-                JsonObject frageDetails = task.getAsJsonObject(String.valueOf(nummer));
-                
-                String frage = frageDetails.get("Frage").getAsString();
-                String antwortenString = frageDetails.get("Antworten").getAsString();
-                List<String> antworten = List.of(antwortenString.split(","));
-                
-                String[] frageUndAntworten = new String[antworten.size() + 1];
-                frageUndAntworten[0] = frage; // Frage als erstes Element
-                for (int i = 0; i < antworten.size(); i++) {
-                    frageUndAntworten[i + 1] = antworten.get(i); // Antworten folgen
+        public String[] viewFrage(int nummer) throws IOException {
+            JsonArray jsonArray = readJsonArray();
+            for (JsonElement element : jsonArray) {
+                JsonObject task = element.getAsJsonObject();
+                if (task.has(String.valueOf(nummer))) {
+                    JsonObject frageDetails = task.getAsJsonObject(String.valueOf(nummer));
+
+                    String frage = frageDetails.get("Frage").getAsString();
+                    String antwortenString = frageDetails.get("Antworten").getAsString();
+                    List<String> antworten = List.of(antwortenString.split(","));
+                    String loesung = frageDetails.get("Loesung").getAsString();
+
+                    String[] frageUndAntworten = new String[antworten.size() + 2];
+                    frageUndAntworten[0] = frage; // Frage als erstes Element
+                    for (int i = 0; i < antworten.size(); i++) {
+                        frageUndAntworten[i + 1] = antworten.get(i); // Antworten folgen
+                    }
+                    frageUndAntworten[frageUndAntworten.length - 1] = loesung; // Lösung als letztes Element
+
+                    return frageUndAntworten;
                 }
-                
-                return frageUndAntworten;
             }
+            throw new IOException("Frage mit der Nummer " + nummer + " wurde nicht gefunden.");
         }
-        throw new IOException("Frage mit der Nummer " + nummer + " wurde nicht gefunden.");
-    }
+    
 
 
     // Methode zum Hinzufügen einer neuen Frage und Antwort mit automatischer Nummer

@@ -4,6 +4,7 @@
 
 package quiz;
 
+import java.awt.Color;
 import java.awt.event.*;
 import java.io.IOException;
 
@@ -15,15 +16,17 @@ import net.miginfocom.swing.*;
  */
 public class MCFragenBeantwortenUI extends JPanel {
     private MCFragenManager fragenManager;
+    private String richtigeLoesung; 
+    private int frageNummer;
 	
 	public MCFragenBeantwortenUI() {
 		initComponents();
 		 fragenManager = new MCFragenManager();
+		 frageNummer = 1;
 		initFrage();
 	}
 
 	private void initFrage() {
-	    int frageNummer = 1; // Beispiel: Lade die erste Frage
 	    try {
 	        // Hole Frage und Antworten mit viewFrage
 	        String[] frageUndAntworten = fragenManager.viewFrage(frageNummer);
@@ -33,6 +36,7 @@ public class MCFragenBeantwortenUI extends JPanel {
 	        radioButton2.setText(frageUndAntworten[2]); // Setze Antwort 2
 	        radioButton3.setText(frageUndAntworten[3]); // Setze Antwort 3
 	        radioButton4.setText(frageUndAntworten[4]); // Setze Antwort 4
+            richtigeLoesung = frageUndAntworten[5];
 	    } catch (IOException e) {
 	        label2.setText("Fehler beim Laden der Frage.");
 	        radioButton1.setText("");
@@ -41,9 +45,33 @@ public class MCFragenBeantwortenUI extends JPanel {
 	        radioButton4.setText("");
 	    }
 	}
+	
+    private void pruefeAntwort() {
+        String ausgewaehlteAntwort = null;
+        // Überprüfe, welcher RadioButton ausgewählt ist
+        if (radioButton1.isSelected()) {
+            ausgewaehlteAntwort = radioButton1.getText();
+        } else if (radioButton2.isSelected()) {
+            ausgewaehlteAntwort = radioButton2.getText();
+        } else if (radioButton3.isSelected()) {
+            ausgewaehlteAntwort = radioButton3.getText();
+        } else if (radioButton4.isSelected()) {
+            ausgewaehlteAntwort = radioButton4.getText();
+        }
+        // Vergleiche die ausgewählte Antwort mit der richtigen Lösung
+        if (ausgewaehlteAntwort != null && ausgewaehlteAntwort.trim().equals(richtigeLoesung)) {
+            label3.setText("Richtig!");
+            label3.setOpaque(true);
+            label3.setBackground(Color.GREEN);
+        } else {
+            label3.setText("Falsch!");
+            label3.setOpaque(true);
+            label3.setBackground(Color.RED);
+        }
+    }
 
 	private void button1(ActionEvent e) {
-		// TODO add your code here
+		pruefeAntwort();
 	}
 
 	private void button2(ActionEvent e) {
