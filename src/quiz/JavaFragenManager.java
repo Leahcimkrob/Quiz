@@ -32,7 +32,7 @@ public class JavaFragenManager implements Aufgabe {
             newTask.add(String.valueOf(neueNummer), taskDetails);
             jsonArray.add(newTask);
             writeJsonArray(jsonArray);
-            System.out.println("Frage erfolg reich hinzugefügt: Nummer " + neueNummer);
+            System.out.println("Frage erfolgreich hinzugefügt: Nummer " + neueNummer);
         } catch (IOException e) {
             e.printStackTrace();
         }
