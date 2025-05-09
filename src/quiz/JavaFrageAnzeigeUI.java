@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class JavaFrageAnzeigeUI extends JPanel {
+	private JPanel mainJPanel = AufgabenTrainerUI.contentPanel;
     private JavaFragenManager fragenManager; // Referenz auf den Fragen-Manager
     private List<JCheckBox> checkBoxList; // Liste aller Checkboxes
     private Map<Integer, String> nummerZuFrageMap; // Map zur Verknüpfung von Zeilennummer und ursprünglicher Nummer
@@ -22,6 +23,13 @@ public class JavaFrageAnzeigeUI extends JPanel {
         initAufgabe(); // Dynamische Zeilen basierend auf den Daten erstellen
     }
 
+    public void showPanel(JPanel panel) {
+        mainJPanel.removeAll();
+        mainJPanel.add(panel);
+        mainJPanel.revalidate();
+        mainJPanel.repaint();
+    }
+    
     private void initAufgabe() {
         // Rufe die Methode getAlleFragenUndAntworten auf, um die Daten zu erhalten
         List<String[]> fragenListe = fragenManager.getAlleFragenUndAntworten();
@@ -63,24 +71,9 @@ public class JavaFrageAnzeigeUI extends JPanel {
 
     public void addNeueFragen() {
         // Hole das Hauptfenster (JFrame) des aktuellen Panels
-        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 
-        if (topFrame != null) {
-            // Entferne alle bestehenden Inhalte des Fensters
-            topFrame.getContentPane().removeAll();
-
-            // Erstelle ein neues JavaFragenNeuUI-Panel
             JavaFragenNeuUI javaFragenNeuUI = new JavaFragenNeuUI();
-
-            // Füge das neue Panel zum Fenster hinzu
-            topFrame.getContentPane().add(javaFragenNeuUI);
-
-            // Aktualisiere und rendere das Fenster neu
-            topFrame.revalidate();
-            topFrame.repaint();
-        } else {
-            System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
-        }
+            showPanel(javaFragenNeuUI);
     }    
     
     private void deleteMarkedQuestions() {
@@ -94,30 +87,11 @@ public class JavaFrageAnzeigeUI extends JPanel {
                 toRemove.add(checkBox); // Checkbox zur Entfernungs-Liste hinzufügen
             }
         }
-
         // Entferne die gelöschten Checkboxen aus der Liste
         checkBoxList.removeAll(toRemove);
-
         // GUI neu laden, um Änderungen anzuzeigen
-        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-
-        if (topFrame != null) {
-            // Entferne alle bestehenden Inhalte des Fensters
-            topFrame.getContentPane().removeAll();
-
-            // Erstelle ein neues JavaFrageAnzeigeUI-Panel
-            JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
-
-            // Füge das neue Panel zum Fenster hinzu
-            topFrame.getContentPane().add(javaFrageAnzeigeUI);
-
-            // Aktualisiere und rendere das Fenster neu
-            topFrame.revalidate();
-            topFrame.repaint();
-        } else {
-            System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
-        }
-
+        JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
+        showPanel(javaFrageAnzeigeUI);
         // Aktualisierte Daten in JSON speichern
         try {
             fragenManager.writeJsonArray(fragenManager.readJsonArray());

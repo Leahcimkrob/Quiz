@@ -13,13 +13,20 @@ import net.miginfocom.swing.*;
  */
 public class JavaFragenNeuUI extends JPanel {
     private JavaFragenManager fragenManager;
+	private JPanel mainJPanel = AufgabenTrainerUI.contentPanel;
 
     public JavaFragenNeuUI() {
         fragenManager = new JavaFragenManager();
         initComponents();
     }
 
- 
+    public void showPanel(JPanel panel) {
+        mainJPanel.removeAll();
+        mainJPanel.add(panel);
+        mainJPanel.revalidate();
+        mainJPanel.repaint();
+    }
+    
     private void addNewQuestion(ActionEvent e) {
         String frage = textField1.getText();
         String antwort = textField2.getText();
@@ -46,25 +53,8 @@ public class JavaFragenNeuUI extends JPanel {
     }
 		
 	    private void switchToJavaFrageAnzeigeUI() {
-	        // Hole das Hauptfenster (JFrame) des aktuellen Panels
-	        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-
-	        if (topFrame != null) {
-	            // Entferne alle bestehenden Inhalte des Fensters
-	            topFrame.getContentPane().removeAll();
-
-	            // Erstelle ein neues JavaFrageAnzeigeUI-Panel
-	            JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
-
-	            // Füge das neue Panel zum Fenster hinzu
-	            topFrame.getContentPane().add(javaFrageAnzeigeUI);
-
-	            // Aktualisiere und rendere das Fenster neu
-	            topFrame.revalidate();
-	            topFrame.repaint();
-	        } else {
-	            System.err.println("Fehler: Kein übergeordnetes Fenster gefunden.");
-	        }
+	    	JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
+            showPanel(javaFrageAnzeigeUI);
 	    }		
 		
 

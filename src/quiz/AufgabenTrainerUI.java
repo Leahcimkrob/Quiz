@@ -8,7 +8,7 @@ public class AufgabenTrainerUI extends JFrame {
     private JPanel panelFragen;
     private JPanel panelJavaCode;
     private JPanel panelJavaFrage; // Neuer Panel für das zweite Menü
-    private JPanel contentPanel;
+    public static JPanel contentPanel;
 
     public AufgabenTrainerUI() {
         setTitle("App mit Menü");
@@ -68,7 +68,7 @@ public class AufgabenTrainerUI extends JFrame {
         return menuBar;
     }
 
-    private void showPanel(JPanel panel) {
+    public void showPanel(JPanel panel) {
         contentPanel.removeAll();
         contentPanel.add(panel);
         contentPanel.revalidate();
