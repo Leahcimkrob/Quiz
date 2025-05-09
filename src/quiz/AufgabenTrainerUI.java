@@ -23,8 +23,7 @@ public class AufgabenTrainerUI extends JFrame {
         panelStart = new JPanel();
         panelStart.add(new JLabel("Aufgaben Trainer"));
 
-        panelFragen = new JPanel();
-        panelFragen.add(new JLabel("Startseite"));
+        panelFragen = new MCFragenBeantwortenUI();
 
         panelJavaCode = new JavaCheckerUI();
 
