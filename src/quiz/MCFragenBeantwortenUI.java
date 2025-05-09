@@ -20,6 +20,20 @@ public class MCFragenBeantwortenUI extends JPanel {
 		// TODO Auto-generated method stub
 		
 	}
+	
+    private void pruefeAntwort() {
+        // TODO: Implementiere die Logik zum Überprüfen der Antwort
+        textField2.setText("Antwort geprüft.");
+    }
+
+    private void naechsteFrage() {
+        if (fragenListe.isEmpty() || aktuelleFrageIndex >= fragenListe.size() - 1) {
+            textField2.setText("Keine weiteren Fragen.");
+            return;
+        }
+        aktuelleFrageIndex++;
+        initFrage(); // Lade die nächste Frage
+    }
 
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
