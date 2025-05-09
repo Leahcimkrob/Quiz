@@ -95,16 +95,20 @@ public class MCFragenBeantwortenUI extends JPanel {
 		label3 = new JLabel();
 
 		//======== this ========
-		setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
-		border.EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER
-		,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font
-		.BOLD,12),java.awt.Color.red), getBorder())); addPropertyChangeListener(
-		new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order"
-		.equals(e.getPropertyName()))throw new RuntimeException();}});
+		setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder (
+		0, 0 ,0 , 0) ,  "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder
+		. BOTTOM, new java. awt .Font ( "D\u0069al\u006fg", java .awt . Font. BOLD ,12 ) ,java . awt. Color .
+		red ) , getBorder () ) );  addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java .
+		beans. PropertyChangeEvent e) { if( "\u0062or\u0064er" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
 		setLayout(new MigLayout(
-			"hidemode 3,alignx center",
+			"hidemode 3",
 			// columns
-			"[234,fill]",
+			"[85,fill]" +
+			"[fill]" +
+			"[fill]" +
+			"[fill]" +
+			"[113,fill]" +
+			"[fill]",
 			// rows
 			"[]" +
 			"[]" +
@@ -117,41 +121,41 @@ public class MCFragenBeantwortenUI extends JPanel {
 
 		//---- label1 ----
 		label1.setText("MultipleCoice-Quiz");
-		add(label1, "cell 0 0,alignx center,growx 0");
+		add(label1, "cell 2 0 3 1,alignx center,growx 0");
 
 		//---- label2 ----
 		label2.setText("Frage");
-		add(label2, "cell 0 1");
+		add(label2, "cell 1 1 5 1,alignx left,growx 0");
 
 		//---- radioButton1 ----
 		radioButton1.setText("Antwort1");
-		add(radioButton1, "cell 0 2");
+		add(radioButton1, "cell 1 2 5 1,alignx left,growx 0");
 
 		//---- radioButton2 ----
 		radioButton2.setText("Antwort2");
-		add(radioButton2, "cell 0 3");
+		add(radioButton2, "cell 1 3 5 1,alignx left,growx 0");
 
 		//---- radioButton3 ----
 		radioButton3.setText("Antwort3");
-		add(radioButton3, "cell 0 4");
+		add(radioButton3, "cell 1 4 5 1,alignx left,growx 0");
 
 		//---- radioButton4 ----
 		radioButton4.setText("Antwort4");
-		add(radioButton4, "cell 0 5");
+		add(radioButton4, "cell 1 5 5 1,alignx left,growx 0");
 
 		//---- button1 ----
 		button1.setText("Antwort Pr\u00fcfen");
 		button1.addActionListener(e -> button1(e));
-		add(button1, "cell 0 6,alignx left,growx 0,width 111::111");
+		add(button1, "cell 2 6,alignx left,growx 0,width 111::111");
 
 		//---- button2 ----
 		button2.setText("N\u00e4chste Frage");
 		button2.addActionListener(e -> button2(e));
-		add(button2, "cell 0 6,alignx right,growx 0,width 111:111");
+		add(button2, "cell 4 6,alignx right,growx 0,width 111:111");
 
 		//---- label3 ----
 		label3.setText("RichtigFalsch");
-		add(label3, "cell 0 7,alignx center,growx 0");
+		add(label3, "cell 2 7 3 1,alignx center,growx 0");
 
 		//---- buttonGroup1 ----
 		var buttonGroup1 = new ButtonGroup();
