@@ -41,6 +41,14 @@ public class JavaFrageAnzeigeUI extends JPanel {
 
             zeile++;
         }
+        //---- button2 ----
+        button2.setText("Markierte Löschen");
+        add(button2, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0"); // Reduced the gap to 10 pixels on the right
+
+        //---- button3 ----
+        button3.setText("Neue hinzufügen");
+        add(button3, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0"); // Reduced the gap to 10 pixels on the left
+        // Hinzufügen der Funktionalität für button2
 
         // Nach dem Hinzufügen von Komponenten die GUI neu validieren
         revalidate();
@@ -71,12 +79,17 @@ public class JavaFrageAnzeigeUI extends JPanel {
     
     private void deleteMarkedQuestions() {
         // Iteriere über die CheckBox-Liste und lösche die markierten Fragen
+        List<JCheckBox> toRemove = new ArrayList<>();
         for (JCheckBox checkBox : checkBoxList) {
             if (checkBox.isSelected()) {
                 int nummer = Integer.parseInt(checkBox.getText()); // Nummer aus der Checkbox
                 fragenManager.deleteFrage(nummer); // Frage löschen
+                toRemove.add(checkBox); // Checkbox zur Entfernungs-Liste hinzufügen
             }
         }
+
+        // Entferne die gelöschten Checkboxen aus der Liste
+        checkBoxList.removeAll(toRemove);
 
         // GUI neu laden, um Änderungen anzuzeigen
         JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
@@ -139,20 +152,7 @@ public class JavaFrageAnzeigeUI extends JPanel {
         label1.setText("Fragenübersicht");
         add(label1, "cell 0 0 4 1,alignx center,growx 0");
 
-        //---- button2 ----
-        button2.setText("Markierte Löschen");
-        add(button2, "cell 1 7 2 1,alignx left,growx 0"); // Reduced the gap to 10 pixels on the right
-
-        //---- button3 ----
-        button3.setText("Neue hinzufügen");
-        add(button3, "cell 1 7 2 1,alignx left,growx 0"); // Reduced the gap to 10 pixels on the left
-        // Hinzufügen der Funktionalität für button2
-        button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deleteMarkedQuestions();
-            }            
-        });
+        button2.addActionListener(e -> deleteMarkedQuestions());
         
         // ActionListener für Button3
         button3.addActionListener(e -> addNeueFragen());

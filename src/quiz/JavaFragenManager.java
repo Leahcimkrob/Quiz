@@ -83,9 +83,7 @@ public class JavaFragenManager implements Aufgabe {
 
             if (deleted) {
                 // Neunummerierung der verbleibenden Fragen
-                JsonArray reindexedArray = reindexQuestions(updatedArray);
-                writeJsonArray(reindexedArray);
-                System.out.println("Frage erfolgreich gelöscht und Nummern neu zugewiesen.");
+                System.out.println("Frage " + nummer + " erfolgreich gelöscht und Nummern neu zugewiesen.");
             } else {
                 System.out.println("Aufgabe mit der Nummer " + nummer + " nicht gefunden.");
             }
@@ -94,25 +92,7 @@ public class JavaFragenManager implements Aufgabe {
         }
     }
 
-    // Hilfsmethode zur Neunummerierung der Fragen
-    private JsonArray reindexQuestions(JsonArray jsonArray) {
-        JsonArray reindexedArray = new JsonArray();
-        int newNumber = 1;
 
-        for (JsonElement element : jsonArray) {
-            JsonObject oldTask = element.getAsJsonObject();
-            String oldKey = oldTask.keySet().iterator().next(); // Hole den alten Schlüssel
-            JsonObject taskDetails = oldTask.getAsJsonObject(oldKey);
-
-            // Erstelle einen neuen Task mit aktualisierter Nummer
-            JsonObject newTask = new JsonObject();
-            newTask.add(String.valueOf(newNumber), taskDetails);
-            reindexedArray.add(newTask);
-            newNumber++;
-        }
-
-        return reindexedArray;
-    }
     // Methode zum Ermitteln der nächsten freien Nummer
     private int getNextNummer(JsonArray jsonArray) {
         int maxNummer = 0;

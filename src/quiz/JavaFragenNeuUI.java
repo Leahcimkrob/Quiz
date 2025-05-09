@@ -44,7 +44,8 @@ public class JavaFragenNeuUI extends JPanel {
         textField1.setText("");
         textField2.setText("");
     }
-			    private void switchToJavaFrageAnzeigeUI() {
+		
+	    private void switchToJavaFrageAnzeigeUI() {
 	        // Hole das Hauptfenster (JFrame) des aktuellen Panels
 	        JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
 
