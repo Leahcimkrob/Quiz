@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "8.2.3.0.386" Java: "21.0.6" encoding: "UTF-8"
+JFDML JFormDesigner: "8.2.3.0.386" Java: "21.0.7" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -6,64 +6,69 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
 			"$layoutConstraints": "hidemode 3,alignx center"
 			"$columnConstraints": "[234,fill]"
-			"$rowConstraints": "[][][][][][][]"
+			"$rowConstraints": "[][][][][][][][]"
 		} ) {
 			name: "this"
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField1"
-				"text": "Frage"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "MultipleCoice-Quiz"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
 				"value": "cell 0 0,alignx center,growx 0"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Frage"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 1"
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioButton1"
 				"text": "Antwort1"
 				"$buttonGroup": new FormReference( "buttonGroup1" )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 1"
+				"value": "cell 0 2"
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioButton2"
 				"text": "Antwort2"
 				"$buttonGroup": new FormReference( "buttonGroup1" )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 2"
+				"value": "cell 0 3"
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioButton3"
 				"text": "Antwort3"
 				"$buttonGroup": new FormReference( "buttonGroup1" )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 3"
+				"value": "cell 0 4"
 			} )
 			add( new FormComponent( "javax.swing.JRadioButton" ) {
 				name: "radioButton4"
 				"text": "Antwort4"
 				"$buttonGroup": new FormReference( "buttonGroup1" )
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 4"
+				"value": "cell 0 5"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Antwort Prüfen"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 5,alignx left,growx 0"
+				"value": "cell 0 6,alignx left,growx 0,width 111::111"
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
 				"text": "Nächste Frage"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 5"
+				"value": "cell 0 6,alignx right,growx 0,width 111:111"
 			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "textField2"
-				"text": "Antwort"
-				"editable": false
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Richtig/Falsch"
 			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
-				"value": "cell 0 6"
+				"value": "cell 0 7,alignx center,growx 0"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 255, 40 )
+			"location": new java.awt.Point( 255, 45 )
 			"size": new java.awt.Dimension( 400, 300 )
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {

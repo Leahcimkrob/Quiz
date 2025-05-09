@@ -24,22 +24,24 @@ public class MCFragenBeantwortenUI extends JPanel {
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
 		// Generated using JFormDesigner Evaluation license - Michael Bork
-		textField1 = new JTextField();
+		label1 = new JLabel();
+		label2 = new JLabel();
 		radioButton1 = new JRadioButton();
 		radioButton2 = new JRadioButton();
 		radioButton3 = new JRadioButton();
 		radioButton4 = new JRadioButton();
 		button1 = new JButton();
 		button2 = new JButton();
-		textField2 = new JTextField();
+		label3 = new JLabel();
 
 		//======== this ========
-		setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
-		border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER
-		,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font
-		.BOLD,12),java.awt.Color.red), getBorder())); addPropertyChangeListener(
-		new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r"
-		.equals(e.getPropertyName()))throw new RuntimeException();}});
+		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
+		. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing
+		. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
+		Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
+		) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
+		public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName (
+		) )) throw new RuntimeException( ); }} );
 		setLayout(new MigLayout(
 			"hidemode 3,alignx center",
 			// columns
@@ -51,40 +53,44 @@ public class MCFragenBeantwortenUI extends JPanel {
 			"[]" +
 			"[]" +
 			"[]" +
+			"[]" +
 			"[]"));
 
-		//---- textField1 ----
-		textField1.setText("Frage");
-		add(textField1, "cell 0 0,alignx center,growx 0");
+		//---- label1 ----
+		label1.setText("MultipleCoice-Quiz");
+		add(label1, "cell 0 0,alignx center,growx 0");
+
+		//---- label2 ----
+		label2.setText("Frage");
+		add(label2, "cell 0 1");
 
 		//---- radioButton1 ----
 		radioButton1.setText("Antwort1");
-		add(radioButton1, "cell 0 1");
+		add(radioButton1, "cell 0 2");
 
 		//---- radioButton2 ----
 		radioButton2.setText("Antwort2");
-		add(radioButton2, "cell 0 2");
+		add(radioButton2, "cell 0 3");
 
 		//---- radioButton3 ----
 		radioButton3.setText("Antwort3");
-		add(radioButton3, "cell 0 3");
+		add(radioButton3, "cell 0 4");
 
 		//---- radioButton4 ----
 		radioButton4.setText("Antwort4");
-		add(radioButton4, "cell 0 4");
+		add(radioButton4, "cell 0 5");
 
 		//---- button1 ----
 		button1.setText("Antwort Pr\u00fcfen");
-		add(button1, "cell 0 5,alignx left,growx 0");
+		add(button1, "cell 0 6,alignx left,growx 0,width 111::111");
 
 		//---- button2 ----
 		button2.setText("N\u00e4chste Frage");
-		add(button2, "cell 0 5");
+		add(button2, "cell 0 6,alignx right,growx 0,width 111:111");
 
-		//---- textField2 ----
-		textField2.setText("Antwort");
-		textField2.setEditable(false);
-		add(textField2, "cell 0 6");
+		//---- label3 ----
+		label3.setText("Richtig/Falsch");
+		add(label3, "cell 0 7,alignx center,growx 0");
 
 		//---- buttonGroup1 ----
 		var buttonGroup1 = new ButtonGroup();
@@ -97,13 +103,14 @@ public class MCFragenBeantwortenUI extends JPanel {
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
 	// Generated using JFormDesigner Evaluation license - Michael Bork
-	private JTextField textField1;
+	private JLabel label1;
+	private JLabel label2;
 	private JRadioButton radioButton1;
 	private JRadioButton radioButton2;
 	private JRadioButton radioButton3;
 	private JRadioButton radioButton4;
 	private JButton button1;
 	private JButton button2;
-	private JTextField textField2;
+	private JLabel label3;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
