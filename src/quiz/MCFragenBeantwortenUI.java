@@ -75,7 +75,8 @@ public class MCFragenBeantwortenUI extends JPanel {
 	}
 
 	private void button2(ActionEvent e) {
-		// TODO add your code here
+		frageNummer++;
+		initFrage();
 	}
 	
 	
