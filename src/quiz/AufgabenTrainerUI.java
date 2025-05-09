@@ -42,7 +42,7 @@ public class AufgabenTrainerUI extends JFrame {
         JMenu navigationMenu1 = new JMenu("Navigation");
         JMenuItem itemStart = new JMenuItem("Start");
         JMenuItem itemFragen = new JMenuItem("MC-Frage");
-        JMenuItem itemJavaCode = new JMenuItem("Programmieraufgabe");
+        JMenuItem itemJavaCode = new JMenuItem("Prog rammieraufgabe");
 
         itemStart.addActionListener(e -> showPanel(panelStart));
         itemFragen.addActionListener(e -> showPanel(panelFragen));
