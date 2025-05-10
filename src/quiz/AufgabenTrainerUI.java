@@ -18,6 +18,7 @@ public class AufgabenTrainerUI extends JFrame {
 
         // Inhalte vorbereiten
         contentPanel = new JPanel(); // Initialisiere contentPanel
+        contentPanel = new BackgroundPanel("Logo groß.png");
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         add(contentPanel); // Füge contentPanel zum JFrame hinzu
 
@@ -37,6 +38,8 @@ public class AufgabenTrainerUI extends JFrame {
         showPanel(panelStart);
         setVisible(true);
     }
+    
+    
 
     private JMenuBar createMenuBar() {
         JMenuBar menuBar = new JMenuBar();
