@@ -41,7 +41,7 @@ public class MCFrageAnzeigeUI extends JPanel {
     private void initAufgabe() {
         // Rufe die Methode getAlleFragenUndAntworten auf, um die Daten zu erhalten
         List<String[]> fragenListe = fragenManager.getAlleFragenUndAntworten();
-        int zeile = 1;
+        int zeile = 2;
         for (String[] frageDetails : fragenListe) {
             // Für jede Nummer, Frage und Antwort eine Zeile erstellen
             JButton button = new JButton("Bearb.");
@@ -86,10 +86,9 @@ public class MCFrageAnzeigeUI extends JPanel {
     }
 
 public void addNeueFragen() {
-    // Hole das Hauptfenster (JFrame) des aktuellen Panels
 
-        JavaFragenNeuUI javaFragenNeuUI = new JavaFragenNeuUI();
-        showPanel(javaFragenNeuUI);
+        MCFragenNeuUI mcFragenNeuUI = new MCFragenNeuUI();
+        showPanel(mcFragenNeuUI);
 }    
 
 private void deleteMarkedQuestions() {
@@ -106,8 +105,8 @@ private void deleteMarkedQuestions() {
     // Entferne die gelöschten Checkboxen aus der Liste
     checkBoxList.removeAll(toRemove);
     // GUI neu laden, um Änderungen anzuzeigen
-    JavaFrageAnzeigeUI javaFrageAnzeigeUI = new JavaFrageAnzeigeUI();
-    showPanel(javaFrageAnzeigeUI);
+    MCFrageAnzeigeUI mcFrageAnzeigeUI = new MCFrageAnzeigeUI();
+    showPanel(mcFrageAnzeigeUI);
     // Aktualisierte Daten in JSON speichern
     try {
         fragenManager.writeJsonArray(fragenManager.readJsonArray());
@@ -127,15 +126,14 @@ private void deleteMarkedQuestions() {
 		label6 = new JLabel();
         button2 = new JButton();
         button3 = new JButton();
-        
+
 		//======== this ========
-		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-		javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax
-		. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-		.awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-		. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans.
-		PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .
-		equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+		setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder
+		(0,0,0,0), "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e",javax.swing.border.TitledBorder.CENTER,javax.swing.border
+		.TitledBorder.BOTTOM,new java.awt.Font("Dialo\u0067",java.awt.Font.BOLD,12),java.awt
+		.Color.red), getBorder())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void
+		propertyChange(java.beans.PropertyChangeEvent e){if("borde\u0072".equals(e.getPropertyName()))throw new RuntimeException()
+		;}});
 		setLayout(new MigLayout(
 			"hidemode 3",
 			// columns
@@ -185,7 +183,7 @@ private void deleteMarkedQuestions() {
 
         // ActionListener für Button3
         button3.addActionListener(e -> addNeueFragen());
-        
+		
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
 	}
 

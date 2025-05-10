@@ -48,9 +48,33 @@ public class MCFragenManager implements Aufgabe {
 
 
     // Methode zum Hinzufügen einer neuen Frage und Antwort mit automatischer Nummer
-    public void addFrage(String frage, String antwort, String loesung) {
+        public void addFrage(String frage, String antwort, String loesung) {
+            try {
+                // JSON-Array aus der Datei lesen
+                JsonArray jsonArray = readJsonArray();
+                
+                // Nächste freie Nummer ermitteln
+                int neueNummer = getNextNummer(jsonArray);
 
-    }
+                // Neues JSON-Objekt erstellen
+                JsonObject neueFrage = new JsonObject();
+                JsonObject frageDetails = new JsonObject();
+                frageDetails.addProperty("Frage", frage);
+                frageDetails.addProperty("Antwort", antwort);
+                frageDetails.addProperty("Loesung", loesung);
+                neueFrage.add(String.valueOf(neueNummer), frageDetails);
+
+                // Neue Frage zum JSON-Array hinzufügen
+                jsonArray.add(neueFrage);
+
+                // Aktualisiertes JSON-Array in die Datei schreiben
+                writeJsonArray(jsonArray);
+
+                System.out.println("Frage erfolgreich hinzugefügt: Nummer " + neueNummer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     // Methode zum Korrigieren von Fragen und Antworten
     public void updateFrage(int nummer, String neueFrage, String neueAntwort, String loesung) {

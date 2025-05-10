@@ -62,6 +62,7 @@ public class AufgabenTrainerUI extends JFrame {
         JMenuItem itemFrageMCFrage = new JMenuItem("MultipleCoice Frage");
         JMenuItem itemFrageJava = new JMenuItem("JavaFrage");
 
+        itemFrageMCFrage.addActionListener(e -> showPanel(panelMCFrage)); 
         itemFrageJava.addActionListener(e -> showPanel(panelJavaFrage)); // Aktion für das zweite Menü
 
         navigationMenu2.add(itemFrageMCFrage);

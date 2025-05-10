@@ -115,7 +115,7 @@ public class JavaFrageAnzeigeUI extends JPanel {
                 "[13,fill]" +
                 "[100:41:41,fill]" +
                 "[194:258,grow,fill]" +
-                "[100:230:100,grow,fill]" +
+                "[fill]" +
                 "[fill]" +
                 "[fill]",
                 // rows
