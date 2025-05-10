@@ -83,7 +83,31 @@ public class MCFragenManager implements Aufgabe {
 
  // Methode zum Löschen einer Frage mit Neunummerierung
     public void deleteFrage(int nummer) {
+        try {
+            JsonArray jsonArray = readJsonArray();
+            JsonArray updatedArray = new JsonArray();
+            boolean deleted = false;
 
+            // Lösche die Frage mit der angegebenen Nummer
+            for (JsonElement element : jsonArray) {
+                JsonObject task = element.getAsJsonObject();
+                if (!task.has(String.valueOf(nummer))) {
+                    updatedArray.add(task);
+                } else {
+                    deleted = true;
+                }
+            }
+
+            if (deleted) {
+                // Schreibe das aktualisierte Array in die Datei
+                writeJsonArray(updatedArray);
+                System.out.println("Frage " + nummer + " erfolgreich gelöscht und Nummern neu zugewiesen.");
+            } else {
+                System.out.println("Aufgabe mit der Nummer " + nummer + " nicht gefunden.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

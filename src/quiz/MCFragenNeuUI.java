@@ -30,34 +30,56 @@ public class MCFragenNeuUI extends JPanel {
     private void addNewQuestion(ActionEvent e) {
         String frage = textField1.getText();
         String antwort1 = textField2.getText();
-        String antwort2 = textField2.getText();
-        String antwort3 = textField2.getText();
-        String antwort4 = textField2.getText();
-        String loesung = textField2.getText();
-        
-        if (frage.isEmpty() || antwort1.isEmpty() || antwort2.isEmpty() || antwort3.isEmpty() || antwort4.isEmpty() || loesung.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Bitte Frage und Antwort eingeben.", "Fehler", JOptionPane.ERROR_MESSAGE);
+        String antwort2 = textField3.getText();
+        String antwort3 = textField4.getText();
+        String antwort4 = textField5.getText();
+
+        // Überprüfen, welcher Radiobutton ausgewählt ist
+        String loesung = null;
+        if (radioButton1.isSelected()) {
+            loesung = antwort1;
+        } else if (radioButton2.isSelected()) {
+            loesung = antwort2;
+        } else if (radioButton3.isSelected()) {
+            loesung = antwort3;
+        } else if (radioButton4.isSelected()) {
+            loesung = antwort4;
+        }
+
+        // Validierung der Eingaben
+        if (frage.isEmpty() || antwort1.isEmpty() || antwort2.isEmpty() || antwort3.isEmpty() || antwort4.isEmpty() || loesung == null) {
+            JOptionPane.showMessageDialog(this, "Bitte alle Felder ausfüllen und eine richtige Antwort auswählen.", "Fehler", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        // Antworten zusammenführen
         String antwort = antwort1 + "; " + antwort2 + "; " + antwort3 + "; " + antwort4;
+
+        // Frage hinzufügen
         fragenManager.addFrage(frage, antwort, loesung);
 
-        int result = JOptionPane.showConfirmDialog(this, 
-            "Frage erfolgreich hinzugefügt.\nMöchten Sie zur Fragenübersicht zurückkehren?", 
-            "Erfolg", 
-            JOptionPane.OK_CANCEL_OPTION, 
+        // Bestätigung anzeigen
+        int result = JOptionPane.showConfirmDialog(this,
+            "Frage erfolgreich hinzugefügt.\nMöchten Sie zur Fragenübersicht zurückkehren?",
+            "Erfolg",
+            JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.INFORMATION_MESSAGE);
 
         if (result == JOptionPane.OK_OPTION) {
             switchToMCFrageAnzeigeUI();
         }
 
+        // Felder und Radiobuttons zurücksetzen
         textField1.setText("");
         textField2.setText("");
         textField3.setText("");
         textField4.setText("");
         textField5.setText("");
-        
+
+        radioButton1.setSelected(false);
+        radioButton2.setSelected(false);
+        radioButton3.setSelected(false);
+        radioButton4.setSelected(false);
     }
 		
 	    private void switchToMCFrageAnzeigeUI() {
@@ -167,7 +189,6 @@ public class MCFragenNeuUI extends JPanel {
 		//---- button1 ----
 		button1.setText("Frage hinzuf\u00fcgen");
 		button1.addActionListener(e -> {
-			addNewQuestion(e);
 			addNewQuestion(e);
 		});
 		add(button1, "cell 0 7 4 1,alignx center,growx 0");

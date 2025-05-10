@@ -15,12 +15,5 @@
       "Antwort": "System.out.println; system.out.printLN; sys.Out.print; print",
       "Loesung": "System.out.println"
     }
-  },
-  {
-    "4": {
-      "Frage": "fsdfds",
-      "Antwort": "dfsd; dfsd; dfsd; dfsd",
-      "Loesung": "dfsd"
-    }
   }
 ]

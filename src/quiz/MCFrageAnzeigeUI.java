@@ -41,13 +41,13 @@ public class MCFrageAnzeigeUI extends JPanel {
     private void initAufgabe() {
         // Rufe die Methode getAlleFragenUndAntworten auf, um die Daten zu erhalten
         List<String[]> fragenListe = fragenManager.getAlleFragenUndAntworten();
-        int zeile = 2;
+        int zeile = 3;
         for (String[] frageDetails : fragenListe) {
             // Für jede Nummer, Frage und Antwort eine Zeile erstellen
             JButton button = new JButton("Bearb.");
 
             // Checkbox mit durchgehender Nummerierung basierend auf der Zeile
-            JCheckBox checkBox = new JCheckBox(String.valueOf(zeile));
+            JCheckBox checkBox = new JCheckBox(String.valueOf(zeile-2));
             nummerZuFrageMap.put(zeile, frageDetails[0]); // Speichere ursprüngliche Nummer mit Zeilennummer
 
             JTextField textFieldFrage = new JTextField(frageDetails[1]); // Textfeld für die Frage
@@ -56,10 +56,25 @@ public class MCFrageAnzeigeUI extends JPanel {
             JTextField textFieldAntwort2 = new JTextField(antworten[1]); // Textfeld für die Antwort
             JTextField textFieldAntwort3 = new JTextField(antworten[2]); // Textfeld für die Antwort
             JTextField textFieldAntwort4 = new JTextField(antworten[3]); // Textfeld für die Antwort
-            JTextField textFieldLoesung = new JTextField(frageDetails[2]); // Textfeld für die Antwort
-            
+
+            // Die richtige Lösung aus den Frage-Details (letzter Eintrag)
+            String richtigeLoesung = frageDetails[frageDetails.length - 1];
+
+            // Hintergrundfarbe für die richtige Antwort setzen
+            if (antworten[0].trim().equals(richtigeLoesung)) {
+                textFieldAntwort1.setBackground(new java.awt.Color(144, 238, 144)); // Hellgrün
+            }
+            if (antworten[1].trim().equals(richtigeLoesung)) {
+                textFieldAntwort2.setBackground(new java.awt.Color(144, 238, 144)); // Hellgrün
+            }
+            if (antworten[2].trim().equals(richtigeLoesung)) {
+                textFieldAntwort3.setBackground(new java.awt.Color(144, 238, 144)); // Hellgrün
+            }
+            if (antworten[3].trim().equals(richtigeLoesung)) {
+                textFieldAntwort4.setBackground(new java.awt.Color(144, 238, 144)); // Hellgrün
+            }
+
             // Dynamisch die Komponenten zur GUI hinzufügen
-           
             add(button, "cell 0 " + (zeile) + ",alignx left"); // Spalte 0
             add(checkBox, "cell 1 " + (zeile) + ",alignx left"); // Spalte 1
             add(textFieldFrage, "cell 2 " + (zeile) + ",growx"); // Spalte 2
@@ -67,22 +82,23 @@ public class MCFrageAnzeigeUI extends JPanel {
             add(textFieldAntwort2, "cell 4 " + (zeile) + ",growx"); // Spalte 4
             add(textFieldAntwort3, "cell 5 " + (zeile) + ",growx"); // Spalte 5
             add(textFieldAntwort4, "cell 6 " + (zeile) + ",growx"); // Spalte 6
-             // Füge die Checkbox zur Liste hinzu
+
+            // Füge die Checkbox zur Liste hinzu
             checkBoxList.add(checkBox);
 
             zeile++;
         }
-		
+
         // Buttons hinzufügen
         button2.setText("Markierte Löschen");
-    	add(button2, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0");
+        add(button2, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0");
 
-    	button3.setText("Neue hinzufügen");
-    	add(button3, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0");
+        button3.setText("Neue hinzufügen");
+        add(button3, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0");
 
-    	// Nach dem Hinzufügen von Komponenten die GUI neu validieren
-    	revalidate();
-    	repaint();
+        // Nach dem Hinzufügen von Komponenten die GUI neu validieren
+        revalidate();
+        repaint();
     }
 
 public void addNeueFragen() {
@@ -97,7 +113,7 @@ private void deleteMarkedQuestions() {
     for (JCheckBox checkBox : checkBoxList) {
         if (checkBox.isSelected()) {
             int zeilennummer = Integer.parseInt(checkBox.getText()); // Zeilennummer aus Checkbox
-            String originalNummer = nummerZuFrageMap.get(zeilennummer); // Ursprüngliche Nummer abrufen
+            String originalNummer = nummerZuFrageMap.get(zeilennummer+2); // Ursprüngliche Nummer abrufen
             fragenManager.deleteFrage(Integer.parseInt(originalNummer)); // Frage löschen
             toRemove.add(checkBox); // Checkbox zur Entfernungs-Liste hinzufügen
         }
@@ -124,6 +140,7 @@ private void deleteMarkedQuestions() {
 		label4 = new JLabel();
 		label5 = new JLabel();
 		label6 = new JLabel();
+		label7 = new JLabel();
         button2 = new JButton();
         button3 = new JButton();
 
@@ -159,25 +176,29 @@ private void deleteMarkedQuestions() {
 		label1.setText("Fragen\u00fcbersicht");
 		add(label1, "cell 0 0 7 1,alignx center,growx 0");
 
+		//---- label1 ----
+		label7.setText("Die richtigen Fragen sind grün markiert.");
+		add(label7, "cell 0 1 7 1,alignx center,growx 0");
+
 		//---- label2 ----
 		label2.setText("Frage");
-		add(label2, "cell 2 1");
+		add(label2, "cell 2 2");
 
 		//---- label3 ----
 		label3.setText("Antwort 1");
-		add(label3, "cell 3 1");
+		add(label3, "cell 3 2");
 
 		//---- label4 ----
 		label4.setText("Antwort 2");
-		add(label4, "cell 4 1");
+		add(label4, "cell 4 2");
 
 		//---- label5 ----
 		label5.setText("Antwort 3");
-		add(label5, "cell 5 1");
+		add(label5, "cell 5 2");
 
 		//---- label6 ----
-		label6.setText("Antwrot 4");
-		add(label6, "cell 6 1");
+		label6.setText("Antwort 4");
+		add(label6, "cell 6 2");
 		
         button2.addActionListener(e -> deleteMarkedQuestions());
 
@@ -195,6 +216,7 @@ private void deleteMarkedQuestions() {
 	private JLabel label4;
 	private JLabel label5;
 	private JLabel label6;
+	private JLabel label7;
     private JButton button2;
     private JButton button3;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
