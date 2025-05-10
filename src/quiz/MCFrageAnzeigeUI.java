@@ -50,35 +50,40 @@ public class MCFrageAnzeigeUI extends JPanel {
             JCheckBox checkBox = new JCheckBox(String.valueOf(zeile));
             nummerZuFrageMap.put(zeile, frageDetails[0]); // Speichere ursprüngliche Nummer mit Zeilennummer
 
-            JLabel label2 = new JLabel(frageDetails[1]); // Textfeld für die Frage
-            JLabel textFieldAntwort = new JLabel(frageDetails[2]); // Textfeld für die Antwort
-            System.out.println(textFieldAntwort);
+            JTextField textFieldFrage = new JTextField(frageDetails[1]); // Textfeld für die Frage
+            String[] antworten = frageDetails[2].split(";");
+            JTextField textFieldAntwort1 = new JTextField(antworten[0]); // Textfeld für die Antwort
+            JTextField textFieldAntwort2 = new JTextField(antworten[1]); // Textfeld für die Antwort
+            JTextField textFieldAntwort3 = new JTextField(antworten[2]); // Textfeld für die Antwort
+            JTextField textFieldAntwort4 = new JTextField(antworten[3]); // Textfeld für die Antwort
+            JTextField textFieldLoesung = new JTextField(frageDetails[2]); // Textfeld für die Antwort
+            
             // Dynamisch die Komponenten zur GUI hinzufügen
+           
             add(button, "cell 0 " + (zeile) + ",alignx left"); // Spalte 0
             add(checkBox, "cell 1 " + (zeile) + ",alignx left"); // Spalte 1
-            add(label2, "cell 2 " + (zeile) + ",growx"); // Spalte 2
-            add(label3.setText(textFieldAntwort[1]), "cell 3 " + (zeile) + ",growx"); // Spalte 3
-            add(label4.setText(textFieldAntwort[2], "cell 4 " + (zeile) + ",growx"); // Spalte 4
-            add(label5.setText(textFieldAntwort[3], "cell 5 " + (zeile) + ",growx"); // Spalte 5
-            add(label6.setText(textFieldAntwort[4], "cell 6 " + (zeile) + ",growx"); // Spalte 6
-    
-            // Füge die Checkbox zur Liste hinzu
+            add(textFieldFrage, "cell 2 " + (zeile) + ",growx"); // Spalte 2
+            add(textFieldAntwort1, "cell 3 " + (zeile) + ",growx"); // Spalte 3
+            add(textFieldAntwort2, "cell 4 " + (zeile) + ",growx"); // Spalte 4
+            add(textFieldAntwort3, "cell 5 " + (zeile) + ",growx"); // Spalte 5
+            add(textFieldAntwort4, "cell 6 " + (zeile) + ",growx"); // Spalte 6
+             // Füge die Checkbox zur Liste hinzu
             checkBoxList.add(checkBox);
 
             zeile++;
         }
 		
-    // Buttons hinzufügen
-    button2.setText("Markierte Löschen");
-    add(button2, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0");
+        // Buttons hinzufügen
+        button2.setText("Markierte Löschen");
+    	add(button2, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0");
 
-    button3.setText("Neue hinzufügen");
-    add(button3, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0");
+    	button3.setText("Neue hinzufügen");
+    	add(button3, "cell 1 " + (zeile + 2) + " 2 1,alignx left,growx 0");
 
-    // Nach dem Hinzufügen von Komponenten die GUI neu validieren
-    revalidate();
-    repaint();
-}
+    	// Nach dem Hinzufügen von Komponenten die GUI neu validieren
+    	revalidate();
+    	repaint();
+    }
 
 public void addNeueFragen() {
     // Hole das Hauptfenster (JFrame) des aktuellen Panels
