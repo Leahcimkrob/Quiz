@@ -29,7 +29,7 @@ public class MCFragenManager implements Aufgabe {
 
                     String frage = frageDetails.get("Frage").getAsString();
                     String antwortenString = frageDetails.get("Antworten").getAsString();
-                    List<String> antworten = List.of(antwortenString.split(","));
+                    List<String> antworten = List.of(antwortenString.split(";"));
                     String loesung = frageDetails.get("Loesung").getAsString();
 
                     String[] frageUndAntworten = new String[antworten.size() + 2];
@@ -107,7 +107,7 @@ public class MCFragenManager implements Aufgabe {
                     JsonObject taskDetails = task.getAsJsonObject(key);
                     String frage = taskDetails.get("Frage").getAsString();
                     String antwort = taskDetails.get("Antwort").getAsString();
-                    String loesung = taskDetails.get("loesung").getAsString();
+                    String loesung = taskDetails.get("Loesung").getAsString();
                     fragenListe.add(new String[]{key, frage, antwort});
                 }
             }

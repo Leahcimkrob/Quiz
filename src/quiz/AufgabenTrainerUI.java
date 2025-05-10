@@ -7,6 +7,7 @@ public class AufgabenTrainerUI extends JFrame {
     private JPanel panelStart;
     private JPanel panelFragen;
     private JPanel panelJavaCode;
+    private JPanel panelMCFrage;
     private JPanel panelJavaFrage; // Neuer Panel für das zweite Menü
     public static JPanel contentPanel;
 
@@ -26,6 +27,8 @@ public class AufgabenTrainerUI extends JFrame {
         panelFragen = new MCFragenBeantwortenUI();
 
         panelJavaCode = new JavaCheckerUI();
+        
+        panelMCFrage = new MCFrageAnzeigeUI();
 
         panelJavaFrage = new JavaFrageAnzeigeUI();
 
@@ -53,13 +56,15 @@ public class AufgabenTrainerUI extends JFrame {
         navigationMenu1.add(itemJavaCode);
 
         menuBar.add(navigationMenu1);
-
+        
         // Zweites Menü: Zusatz
         JMenu navigationMenu2 = new JMenu("Bearbeiten");
+        JMenuItem itemFrageMCFrage = new JMenuItem("MultipleCoice Frage");
         JMenuItem itemFrageJava = new JMenuItem("JavaFrage");
 
         itemFrageJava.addActionListener(e -> showPanel(panelJavaFrage)); // Aktion für das zweite Menü
 
+        navigationMenu2.add(itemFrageMCFrage);
         navigationMenu2.add(itemFrageJava);
 
         menuBar.add(navigationMenu2); // Füge das zweite Menü hinzu

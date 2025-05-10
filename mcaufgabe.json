@@ -2,17 +2,17 @@
 	{
 	  "1": {
 	    "Frage": "Wie heisst die ehemalige Hauptstadt von Deutschland?",
-	    "Antworten": "Berlin, Düsseldorf, Bonn, Hamburg",
+	    "Antwort": "Berlin; Düsseldorf; Bonn; Hamburg",
 	    "Loesung": "Bonn"
 	  },
 	  "2": {
 	    "Frage": "Was sind 2+2*2",
-	    "Antworten": "8, 16, 4, 6",
+	    "Antwort": "8; 16; 4; 6",
 	    "Loesung": "6"
 	  },
 	  "3": {
 	    "Frage": "Mit welcher Methode kann was auf dem Bildschirm ausgegeben werden?",
-	    "Antworten": "System.out.println, system.out.printLN, sys.Out.print, print",
+	    "Antwort": "System.out.println; system.out.printLN; sys.Out.print; print",
 	    "Loesung": "System.out.println"
 	  }
 	}
