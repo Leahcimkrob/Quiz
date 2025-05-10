@@ -28,7 +28,7 @@ public class MCFragenManager implements Aufgabe {
                     JsonObject frageDetails = task.getAsJsonObject(String.valueOf(nummer));
 
                     String frage = frageDetails.get("Frage").getAsString();
-                    String antwortenString = frageDetails.get("Antworten").getAsString();
+                    String antwortenString = frageDetails.get("Antwort").getAsString();
                     List<String> antworten = List.of(antwortenString.split(";"));
                     String loesung = frageDetails.get("Loesung").getAsString();
 

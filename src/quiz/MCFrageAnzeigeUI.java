@@ -50,18 +50,18 @@ public class MCFrageAnzeigeUI extends JPanel {
             JCheckBox checkBox = new JCheckBox(String.valueOf(zeile));
             nummerZuFrageMap.put(zeile, frageDetails[0]); // Speichere ursprüngliche Nummer mit Zeilennummer
 
-            JTextField textFieldFrage = new JTextField(frageDetails[1]); // Textfeld für die Frage
-            JTextField textFieldAntwort = new JTextField(frageDetails[2]); // Textfeld für die Antwort
+            JLabel label2 = new JLabel(frageDetails[1]); // Textfeld für die Frage
+            JLabel textFieldAntwort = new JLabel(frageDetails[2]); // Textfeld für die Antwort
             System.out.println(textFieldAntwort);
             // Dynamisch die Komponenten zur GUI hinzufügen
             add(button, "cell 0 " + (zeile) + ",alignx left"); // Spalte 0
             add(checkBox, "cell 1 " + (zeile) + ",alignx left"); // Spalte 1
-            add(textFieldFrage, "cell 2 " + (zeile) + ",growx"); // Spalte 2
-//            add(textFieldAntwort.setText(textFieldAntwort[1]), "cell 3 " + (zeile) + ",growx"); // Spalte 3
-//            add(textFieldAntwort.setText(textFieldAntwort[1], "cell 4 " + (zeile) + ",growx"); // Spalte 4
-//            add(textFieldAntwort.setText(textFieldAntwort[1], "cell 5 " + (zeile) + ",growx"); // Spalte 5
-//            add(textFieldAntwort.setText(textFieldAntwort[1], "cell 6 " + (zeile) + ",growx"); // Spalte 6
-
+            add(label2, "cell 2 " + (zeile) + ",growx"); // Spalte 2
+            add(label3.setText(textFieldAntwort[1]), "cell 3 " + (zeile) + ",growx"); // Spalte 3
+            add(label4.setText(textFieldAntwort[2], "cell 4 " + (zeile) + ",growx"); // Spalte 4
+            add(label5.setText(textFieldAntwort[3], "cell 5 " + (zeile) + ",growx"); // Spalte 5
+            add(label6.setText(textFieldAntwort[4], "cell 6 " + (zeile) + ",growx"); // Spalte 6
+    
             // Füge die Checkbox zur Liste hinzu
             checkBoxList.add(checkBox);
 
@@ -120,18 +120,17 @@ private void deleteMarkedQuestions() {
 		label4 = new JLabel();
 		label5 = new JLabel();
 		label6 = new JLabel();
-        label1 = new JLabel();
         button2 = new JButton();
         button3 = new JButton();
-
+        
 		//======== this ========
-		setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.
-		swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border
-		.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog"
-		,java.awt.Font.BOLD,12),java.awt.Color.red), getBorder
-		())); addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java
-		.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException
-		();}});
+		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+		javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax
+		. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+		.awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+		. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans.
+		PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .
+		equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 		setLayout(new MigLayout(
 			"hidemode 3",
 			// columns
@@ -179,6 +178,7 @@ private void deleteMarkedQuestions() {
 		
         button2.addActionListener(e -> deleteMarkedQuestions());
 
+        // ActionListener für Button3
         button3.addActionListener(e -> addNeueFragen());
         
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
@@ -193,6 +193,6 @@ private void deleteMarkedQuestions() {
 	private JLabel label5;
 	private JLabel label6;
     private JButton button2;
-    private JButton button3;	
+    private JButton button3;
 	// JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
