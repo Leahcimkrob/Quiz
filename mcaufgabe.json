@@ -15,5 +15,19 @@
       "Antwort": "System.out.println; system.out.printLN; sys.Out.print; print",
       "Loesung": "System.out.println"
     }
+  },
+  {
+    "5": {
+      "Frage": "sdfs",
+      "Antwort": "dfs; sdff; dfsdsfs; dfds",
+      "Loesung": "sdff"
+    }
+  },
+  {
+    "7": {
+      "Frage": "fsdfsdfds",
+      "Antwort": "fdsfsdfdsfdsf; sd; fds; dsdsfsdfsd",
+      "Loesung": "fds"
+    }
   }
 ]

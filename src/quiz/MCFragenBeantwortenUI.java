@@ -30,6 +30,7 @@ public class MCFragenBeantwortenUI extends JPanel {
 	    try {
 	        // Hole Frage und Antworten mit viewFrage
 	        String[] frageUndAntworten = fragenManager.viewFrage(frageNummer);
+	        int anzahlElemente = frageUndAntworten.length;
 	        
 	        label2.setText(frageUndAntworten[0]); // Setze die Frage
 	        radioButton1.setText(frageUndAntworten[1]); // Setze Antwort 1

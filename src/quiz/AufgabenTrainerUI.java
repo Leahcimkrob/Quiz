@@ -1,6 +1,11 @@
 package quiz;
 
 import javax.swing.*;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.*;
 
 public class AufgabenTrainerUI extends JFrame {
@@ -12,25 +17,26 @@ public class AufgabenTrainerUI extends JFrame {
     public static JPanel contentPanel;
 
     public AufgabenTrainerUI() {
-        setTitle("App mit Menü");
+        setTitle("AufgabenTrainer");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 640);
 
         // Inhalte vorbereiten
         contentPanel = new JPanel(); // Initialisiere contentPanel
-        contentPanel = new BackgroundPanel("Logo groß.png");
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         add(contentPanel); // Füge contentPanel zum JFrame hinzu
 
-        panelStart = new JPanel();
-        panelStart.add(new JLabel("Aufgaben Trainer"));
+        // Verwende BackgroundPanel für panelStart
+        panelStart = new BackgroundPanel("/quiz/background.png");
+        panelStart.setLayout(new BorderLayout()); // Flexibles Layout für das Panel
+        JLabel titleLabel = new JLabel("Aufgaben Trainer", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+        titleLabel.setForeground(Color.BLACK);
+        panelStart.add(titleLabel, BorderLayout.NORTH); // Label oben hinzufügen
 
         panelFragen = new MCFragenBeantwortenUI();
-
         panelJavaCode = new JavaCheckerUI();
-        
         panelMCFrage = new MCFrageAnzeigeUI();
-
         panelJavaFrage = new JavaFrageAnzeigeUI();
 
         setJMenuBar(createMenuBar());
@@ -45,7 +51,7 @@ public class AufgabenTrainerUI extends JFrame {
         JMenuBar menuBar = new JMenuBar();
 
         // Erstes Menü: Navigation
-        JMenu navigationMenu1 = new JMenu("Navigation");
+        JMenu navigationMenu1 = new JMenu("Aufgaben");
         JMenuItem itemStart = new JMenuItem("Start");
         JMenuItem itemFragen = new JMenuItem("MC-Frage");
         JMenuItem itemJavaCode = new JMenuItem("Programmieraufgabe");
