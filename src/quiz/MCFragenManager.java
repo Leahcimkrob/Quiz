@@ -108,7 +108,7 @@ public class MCFragenManager implements Aufgabe {
                     String frage = taskDetails.get("Frage").getAsString();
                     String antwort = taskDetails.get("Antwort").getAsString();
                     String loesung = taskDetails.get("Loesung").getAsString();
-                    fragenListe.add(new String[]{key, frage, antwort});
+                    fragenListe.add(new String[]{key, frage, antwort, loesung});
                 }
             }
         } catch (IOException e) {
