@@ -110,13 +110,13 @@ public class MCFragenNeuUI extends JPanel {
 		button1 = new JButton();
 
 		//======== this ========
-		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
-		javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
-		. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
-		.awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-		. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans.
-		PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .
-		equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
+		swing. border. EmptyBorder( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border
+		. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog"
+		,java .awt .Font .BOLD ,12 ), java. awt. Color. red) , getBorder
+		( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
+		.beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException
+		( ); }} );
 		setLayout(new MigLayout(
 			"hidemode 3",
 			// columns
@@ -149,36 +149,24 @@ public class MCFragenNeuUI extends JPanel {
 		label2.setText("Frage:");
 		add(label2, "cell 1 2");
 		add(textField1, "cell 2 2");
-
-		//---- radioButton1 ----
-		radioButton1.setText("text");
 		add(radioButton1, "cell 0 3");
 
 		//---- label3 ----
 		label3.setText("Antwort 1");
 		add(label3, "cell 1 3");
 		add(textField2, "cell 2 3");
-
-		//---- radioButton2 ----
-		radioButton2.setText("text");
 		add(radioButton2, "cell 0 4");
 
 		//---- label5 ----
 		label5.setText("Antwort 2");
 		add(label5, "cell 1 4");
 		add(textField3, "cell 2 4");
-
-		//---- radioButton3 ----
-		radioButton3.setText("text");
 		add(radioButton3, "cell 0 5");
 
 		//---- label6 ----
 		label6.setText("Antwort 3");
 		add(label6, "cell 1 5");
 		add(textField4, "cell 2 5");
-
-		//---- radioButton4 ----
-		radioButton4.setText("text");
 		add(radioButton4, "cell 0 6");
 
 		//---- label7 ----
@@ -189,6 +177,7 @@ public class MCFragenNeuUI extends JPanel {
 		//---- button1 ----
 		button1.setText("Frage hinzuf\u00fcgen");
 		button1.addActionListener(e -> {
+			addNewQuestion(e);
 			addNewQuestion(e);
 		});
 		add(button1, "cell 0 7 4 1,alignx center,growx 0");

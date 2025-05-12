@@ -75,6 +75,9 @@ new FormModel {
 		} )
 		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
 			name: "buttonGroup1"
+			auxiliary() {
+				"JavaCodeGenerator.variableLocal": false
+			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 310 )
 		} )
