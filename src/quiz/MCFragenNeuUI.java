@@ -87,7 +87,7 @@ public class MCFragenNeuUI extends JPanel {
             showPanel(mcFrageAnzeigeUI);
 	    }		
 		
-
+	    
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
 		// Generated using JFormDesigner Evaluation license - Michael Bork
