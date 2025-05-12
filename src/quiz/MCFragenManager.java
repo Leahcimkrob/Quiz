@@ -126,6 +126,29 @@ public class MCFragenManager implements Aufgabe {
         return maxNummer + 1; // Nächste Nummer ist die höchste Nummer + 1
     }
 
+ // Method to get all existing indices
+    public List<Integer> getExistingIndices() {
+        List<Integer> indices = new ArrayList<>();
+        try {
+            JsonArray jsonArray = readJsonArray();
+            for (JsonElement element : jsonArray) {
+                JsonObject task = element.getAsJsonObject();
+                for (String key : task.keySet()) {
+                    indices.add(Integer.parseInt(key));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return indices;
+    }
+
+    // Method to get the maximum existing index
+    public int getMaxExistingIndex() {
+        List<Integer> indices = getExistingIndices();
+        return indices.isEmpty() ? 0 : indices.stream().max(Integer::compare).orElse(0);
+    }
+    
     // Hilfsmethode zum Lesen des JSON-Arrays
     JsonArray readJsonArray() throws IOException {
         FileReader reader = new FileReader(jsonFilePath);

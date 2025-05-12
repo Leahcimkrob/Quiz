@@ -4,48 +4,61 @@
 
 package quiz;
 
-import java.awt.Color;
-import java.awt.event.*;
-import java.io.IOException;
-
 import javax.swing.*;
+
 import net.miginfocom.swing.*;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * @author mbor193
  */
 public class MCFragenBeantwortenUI extends JPanel {
     private MCFragenManager fragenManager;
-    private String richtigeLoesung; 
-    private int frageNummer;
-	
-	public MCFragenBeantwortenUI() {
-		initComponents();
-		 fragenManager = new MCFragenManager();
-		 frageNummer = 1;
-		initFrage();
-	}
+    private String richtigeLoesung;
+    private int currentIndex; // Aktuelle Position in der Liste der existierenden Indizes
+    private List<Integer> existingIndices;
 
-	private void initFrage() {
-	    try {
-	        // Hole Frage und Antworten mit viewFrage
-	        String[] frageUndAntworten = fragenManager.viewFrage(frageNummer);
-	        int anzahlElemente = frageUndAntworten.length;
-	        
-	        label2.setText(frageUndAntworten[0]); // Setze die Frage
-	        radioButton1.setText(frageUndAntworten[1]); // Setze Antwort 1
-	        radioButton2.setText(frageUndAntworten[2]); // Setze Antwort 2
-	        radioButton3.setText(frageUndAntworten[3]); // Setze Antwort 3
-	        radioButton4.setText(frageUndAntworten[4]); // Setze Antwort 4
-            richtigeLoesung = frageUndAntworten[5];
-	    } catch (IOException e) {
-	        label2.setText("Fehler beim Laden der Frage.");
-	        radioButton1.setText("");
-	        radioButton2.setText("");
-	        radioButton3.setText("");
-	        radioButton4.setText("");
-	    }
-	}
+    public MCFragenBeantwortenUI() {
+        initComponents();
+        fragenManager = new MCFragenManager();
+        existingIndices = fragenManager.getExistingIndices();
+        currentIndex = 0;
+        initFrage();
+    }
+
+    private void initFrage() {
+        if (!existingIndices.isEmpty()) {
+            int frageNummer = existingIndices.get(currentIndex);
+            try {
+            	System.out.println("\n-------" + currentIndex);
+                String[] frageUndAntworten = fragenManager.viewFrage(frageNummer);
+                label2.setText(currentIndex + 1 + ": " + frageUndAntworten[0]); // Setze die Frage
+                radioButton1.setText(frageUndAntworten[1]); // Setze Antwort 1
+                radioButton2.setText(frageUndAntworten[2]); // Setze Antwort 2
+                radioButton3.setText(frageUndAntworten[3]); // Setze Antwort 3
+                radioButton4.setText(frageUndAntworten[4]); // Setze Antwort 4
+                richtigeLoesung = frageUndAntworten[5];
+                
+                radioButton1.setSelected(false);
+                radioButton2.setSelected(false);
+                radioButton3.setSelected(false);
+                radioButton4.setSelected(false);
+                
+            } catch (IOException e) {
+                label2.setText("Fehler beim Laden der Frage.");
+                radioButton1.setText("");
+                radioButton2.setText("");
+                radioButton3.setText("");
+                radioButton4.setText("");
+            }
+        } else {
+            label2.setText("Keine Fragen verfügbar.");
+        }
+    }
 	
     private void pruefeAntwort() {
         String ausgewaehlteAntwort = null;
@@ -75,10 +88,13 @@ public class MCFragenBeantwortenUI extends JPanel {
 		pruefeAntwort();
 	}
 
-	private void button2(ActionEvent e) {
-		frageNummer++;
-		initFrage();
-	}
+    private void button2(ActionEvent e) {
+        currentIndex++;
+        if (currentIndex >= existingIndices.size()) {
+            currentIndex = 0; // Zurück zur ersten Frage
+        }
+        initFrage(); // Lade die nächste Frage basierend auf dem aktuellen Index
+    }
 	
 	
 
