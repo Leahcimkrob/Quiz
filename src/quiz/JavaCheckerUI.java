@@ -42,7 +42,7 @@ public class JavaCheckerUI extends JPanel {
         currentQuestion = javaChecker.frageText; // Speichert die Frage in der Instanzvariable
         currentAnswer = javaChecker.antwort; // Speichert die Antwort in der Instanzvariable
         int currentTaskNumber = javaChecker.currentTaskNumber; // Holt die Nummer der aktuellen Aufgabe
-        label1.setText("Aufgabe " + currentTaskNumber + ": " + currentQuestion); // Nummer und Frage anzeigen
+        label1.setText("Aufgabe " + (currentTaskIndex + 1) + ": " + currentQuestion); // Nummer und Frage anzeigen
     }
 
     private void initNummern() {

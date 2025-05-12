@@ -43,11 +43,10 @@ public class MCFragenBeantwortenUI extends JPanel {
                 radioButton4.setText(frageUndAntworten[4]); // Setze Antwort 4
                 richtigeLoesung = frageUndAntworten[5];
                 
-                radioButton1.setSelected(false);
+        		radioButton1.setSelected(false);
                 radioButton2.setSelected(false);
                 radioButton3.setSelected(false);
                 radioButton4.setSelected(false);
-                
             } catch (IOException e) {
                 label2.setText("Fehler beim Laden der Frage.");
                 radioButton1.setText("");
@@ -112,12 +111,13 @@ public class MCFragenBeantwortenUI extends JPanel {
 		label3 = new JLabel();
 
 		//======== this ========
-		setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
-		( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
-		. TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
-		. Color. red) , getBorder( )) );  addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
-		propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
-		; }} );
+		setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new
+		javax.swing.border.EmptyBorder(0,0,0,0), "JFor\u006dDesi\u0067ner \u0045valu\u0061tion",javax
+		.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java
+		.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt
+		.Color.red), getBorder())); addPropertyChangeListener(new java.beans.
+		PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("bord\u0065r".
+		equals(e.getPropertyName()))throw new RuntimeException();}});
 		setLayout(new MigLayout(
 			"hidemode 3",
 			// columns
